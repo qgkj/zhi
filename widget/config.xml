@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<widget id="A6932697876890" version="0.0.1"> 
+  <name>zhifu</name>  
+  <description/>  
+  <author email="1358933572@qq.com" href="http://www.apicloud.com">QG科技</author>  
+  <content src="index.html"/>  
+  <preference name="pageBounce" value="false"/>  
+  <preference name="appBackground" value="rgba(0,0,0,0.0)"/>  
+  <preference name="windowBackground" value="rgba(0,0,0,0.0)"/>  
+  <preference name="frameBackgroundColor" value="rgba(0,0,0,0.0)"/>  
+  <preference name="hScrollBarEnabled" value="true"/>  
+  <preference name="vScrollBarEnabled" value="true"/>  
+  <preference name="autoLaunch" value="true"/>  
+  <preference name="fullScreen" value="false"/>  
+  <preference name="autoUpdate" value="true"/>  
+  <preference name="smartUpdate" value="false"/>  
+  <preference name="debug" value="true"/>  
+  <preference name="statusBarAppearance" value="true"/>  
+  <permission name="readPhoneState"/>  
+  <permission name="camera"/>  
+  <permission name="record"/>  
+  <permission name="location"/>  
+  <permission name="fileSystem"/>  
+  <permission name="internet"/>  
+  <permission name="bootCompleted"/>  
+  <permission name="hardware"/>  
+  <feature name="wxPay"> 
+    <param name="urlScheme" value="wx1261cf5a3d69c6a5"/>  
+    <param name="apiKey" value="wx1261cf5a3d69c6a5"/>  
+    <param name="apiSecret" value="1be8bf987c405716e2025e2ea086e0af"/> 
+  </feature>  
+  <access origin="*"/> 
+</widget>
