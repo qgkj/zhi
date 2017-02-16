@@ -597,8 +597,8 @@
     };
     
     u.ajax = function( url, method, bodyParam, callBack ){
-		var appId="A6981075723139";
-		var key="F2775A7D-18E5-E6E7-F766-2B793DBDB153";
+		var appId="A6932697876890";
+		var key="75B4074A-820A-C8AC-A600-8250ECD60FF5";
 		var timec=new Date().getTime();
 		var appKey=SHA1(appId+"UZ"+key+"UZ"+timec)+"."+timec;
 		if( url.indexOf( 'logout' ) != -1 || url == '/user' ){
