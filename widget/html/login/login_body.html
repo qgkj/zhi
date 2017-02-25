@@ -253,7 +253,7 @@
   <script type="text/javascript">
     apiready = function(){
     $api.skin();
-    checklogin();
+    //checklogin();
   }
   
   function funLog( tag ){
@@ -282,7 +282,7 @@
             $api.setStorage('key',de);
             api.execScript();
             
-            api.setPrefs({    key: de,    value: '1'});
+            //api.setPrefs({    key: de,    value: '1'});
 
             //showAlert('登录成功！'+ JSON.stringify(ret));//登录成功将返回用户基本信息
             H.$openFrame('index_head','../index_head.html');
