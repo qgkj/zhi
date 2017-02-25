@@ -223,17 +223,24 @@
                         if (ret) {
                             //showAlert("提交成功");
                             //jindua();
-                            api.closeWin();
-                            api.alert({
-                            title: 'success',
-                            msg: '提交成功',
-                        }, function(ret, err){
-                            if( ret ){
-                                 H.$openFrame('wdzl_head', 'wdzl_head.html');
-                            }else{
-                                 alert( JSON.stringify( err ) );
-                            }
-                        });
+                            //api.closeWin();
+                            api.openWin({
+                                name: 'wdzl_head',
+                                url: './wdzl_head.html',
+                                pageParam: {
+                                    name: 'test'
+                                }
+                            });
+                        //     api.alert({
+                        //     title: 'success',
+                        //     msg: '提交成功',
+                        // }, function(ret, err){
+                        //     if( ret ){
+                        //          H.$openFrame('wdzl_head', 'wdzl_head.html');
+                        //     }else{
+                        //          alert( JSON.stringify( err ) );
+                        //     }
+                        // });
                         } else {
                             showAlert("提交失败，请检查网络设置！");
                         }
