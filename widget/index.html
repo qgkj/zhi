@@ -17,17 +17,6 @@
 	<script type="text/javascript" src="./script/mcm/common.js"></script>
 	<script type="text/javascript" src="./script/h/H.js"></script>
 	<script type="text/javascript">
-apiready = function(){
-                    var UserID=api.getPrefs({sync: true, key: 'UserID' });
-                if(UserID<=0){
-                     //这里↓跳转登录页面
-                     H.$openFrame('login_head','./html/login/login_head.html');
-                }
-                //这里↓写登录后需要跳转的页面
-                H.$openFrame('index_head','./html/index_head.html');
-}
-    
-
 
 		H.ready(function() {
 			// 移除启动页

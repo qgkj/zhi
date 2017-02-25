@@ -305,6 +305,13 @@
                 // }
                 // //这里↓写登录后需要跳转的页面
                 // H.$openFrame('index_head','../index_head.html');
+        var id = $api.getStorage('key');
+        if(id == null){
+        //没有登陆 ，这里可以写打开窗口代码
+        }else{
+        //成功登陆 ， 这里可以写登陆后显示的代码
+        H.$openFrame('index_head','../index_head.html');
+        }
   }
   </script>
 </html>
