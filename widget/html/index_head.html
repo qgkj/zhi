@@ -430,12 +430,7 @@
 			// 		}, 'user_info');
 			// 	} 
 			// });
-			    var UserID=api.getPrefs({sync: true, key: 'UserID' });
-                if(UserID<=0){
-                     //这里↓跳转登录页面
-                     H.$openFrame('login_head', './login/login_head.html');
-                }
-                //这里↓写登录后需要跳转的页面
+
 			// 双击退出应用，并清除缓存
 			H.$dblclickToCloseApp(function() {
 				H.$toast("祝您开心每一天");
