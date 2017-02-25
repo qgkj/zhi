@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>帮分期</title>
+	<link rel="stylesheet" href="../../../css/Hui.css">
+	<link rel="stylesheet" href="../../../css/ziti.css">
+    <link rel="stylesheet" href="../../../css/bank/demo.css">
+    <link rel="stylesheet" href="../../../css/bank/iconfont.css">
+    <link rel="stylesheet" href="../../../css/daizt/demo.css">
+    <link rel="stylesheet" href="../../../css/daizt/iconfont.css">
+</head>
+<style type="text/css">
+    .li-img { width: 200px; }
+    .li-text { position: relative; margin-left:20px; margin-top:20px; line-height: normal;}
+    .lqi-text { position: relative; margin-left:20px; margin-top:10px; line-height: normal;}
+    .mag{margin-top:20px;}
+</style>
+<body>
+<!--############## 办卡银行 ##############-->
+    <div class="H-func-menu-list H-flexbox-horizontal H-background-white">
+        <div class="H-func-menu-item H-flex-item H-text-horizontal-center H-vertical-padding10" tapmode="" onclick="H.openWin('zhongguo_head', '../../bank/zhongguo/zhongguo_head.html');">
+            <span class="H-icon H-theme4-bg H-center-all H-border-radius-circle H-block-margin-auto"><i class="icon iconfont icon-zhongguoyinxing H-theme11-color"></i></span>
+            <p class="H-font-size-13 H-margin-top5">中国银行</p>
+        </div>
+        <div class="H-func-menu-item H-flex-item H-text-horizontal-center H-vertical-padding10" tapmode="" onclick="H.openWin('zhaoshang_head', '../../bank/zhaoshang/zhaoshang_head.html');">
+            <span class="H-icon H-theme1-bg H-center-all H-border-radius-circle H-block-margin-auto"><i class="icon-iconfont icon-zhaoshang H-theme11-color"></i></span>
+            <p class="H-font-size-13 H-margin-top5">招商银行</p>
+        </div>
+        <div class="H-func-menu-item H-flex-item H-text-horizontal-center H-vertical-padding10" tapmode="" onclick="H.openWin('zhongxin_head', '../../bank/zhongxin/zhongxin_head.html');">
+            <span class="H-icon H-theme2-bg H-center-all H-border-radius-circle H-block-margin-auto icon-iconfont icon-zhongxin H-theme11-color">
+            	
+            </span>
+            <p class="H-font-size-13 H-margin-top5">中信银行</p>
+        </div>
+        <div class="H-func-menu-item H-flex-item H-text-horizontal-center H-vertical-padding10" tapmode="" onclick="H.openWin('pingan_head', '../../bank/pingan/pingan_head.html');">
+            <span class="H-icon H-theme3-bg H-center-all H-border-radius-circle H-block-margin-auto icon-iconfont icon-pingan H-theme11-color"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span><span class="path7"></span></span>
+            <p class="H-font-size-13 H-margin-top5">平安银行</p>
+        </div>
+        <div class="H-func-menu-item H-flex-item H-text-horizontal-center H-vertical-padding10" tapmode="" onclick="H.openWin('jiaotong_head', '../../bank/jiaotong/jiaotong_head.html');">
+            <span class="H-icon H-theme4-bg H-center-all H-border-radius-circle H-block-margin-auto"><i class="icon-iconfont icon-jiaotong H-theme11-color"></i></span>
+            <p class="H-font-size-13 H-margin-top5">交通银行</p>
+        </div>
+        
+    </div>
+    <div class="H-func-menu-list H-flexbox-horizontal H-background-white">
+        <div class="H-func-menu-item H-flex-item H-text-horizontal-center H-vertical-padding10" tapmode="" onclick="H.openWin('guangda_head', '../../bank/guangda/guangda_head.html');">
+            <span class="H-icon H-theme1-bg H-center-all H-border-radius-circle H-block-margin-auto icon-iconfont icon-guangda H-theme11-color">
+            	<span class="path1"></span><span class="path2"></span>
+            </span>
+            <p class="H-font-size-13 H-margin-top5">光大银行</p>
+        </div>
+        <div class="H-func-menu-item H-flex-item H-text-horizontal-center H-vertical-padding10" tapmode="" onclick="H.openWin('guangfa_head', '../../bank/guangfa/guangfa_head.html');">
+            <span class="H-icon H-theme5-bg H-center-all H-border-radius-circle H-block-margin-auto icon-iconfont icon-guangfa H-theme11-color">
+                <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span>
+            </span>
+            <p class="H-font-size-13 H-margin-top5">广发银行</p>
+        </div>
+        <div class="H-func-menu-item H-flex-item H-text-horizontal-center H-vertical-padding10" tapmode="" onclick="H.openWin('pufa_head', '../../bank/pufa/pufa_head.html');">
+            <span class="H-icon H-theme2-bg H-center-all H-border-radius-circle H-block-margin-auto"><i class="icon-iconfont icon-pufa H-theme11-color"></i></span>
+            <p class="H-font-size-13 H-margin-top5">浦发银行</p>
+        </div>
+        <div class="H-func-menu-item H-flex-item H-text-horizontal-center H-vertical-padding10" tapmode="" onclick="H.openWin('minsheng_head', '../../bank/minsheng/minsheng_head.html');">
+            <span class="H-icon H-theme3-bg H-center-all H-border-radius-circle H-block-margin-auto icon-iconfont icon-minsheng H-theme11-color">
+            	<span class="path1"></span><span class="path2"></span>
+            </span>
+            <p class="H-font-size-13 H-margin-top5">民生银行</p>
+        </div>
+        <div class="H-func-menu-item H-flex-item H-text-horizontal-center H-vertical-padding10" tapmode="" onclick="H.openWin('more_head', 'more_head.html');">
+            <span class="H-icon H-theme5-bg H-center-all H-border-radius-circle H-block-margin-auto"><i class="icon-iconfont icon-ddd H-theme11-color"></i></span>
+            <p class="H-font-size-13 H-margin-top5">更多</p>
+        </div>
+    </div>
+    <p class="H-margin-bottom10 H-width100-percent H-auto-height"></p>
+
+
+            <!--############## 热门信用卡 ##############-->
+    <div class="H-title-channel H-background-white">
+        <span class="H-bold-line H-theme9-bg"></span><label class="H-label-text H-theme9-color">热门信用卡</label>
+    </div>
+    <p class="H-margin-bottom10 H-width100-percent H-auto-height"></p>
+    <div class="H-rich-list">
+
+
+        <div class="H-rich-item H-flexbox-horizontal H-padding10 H-background-white" tapmode="" onclick="H.openWin('pufa_head', '../../bank/pufa/pufa_head.html');">
+            <img src="../../../image/ka/pufa.png" class="li-img H-margin-right10" alt="" title="" />
+            <div class="li-text H-flex-item">
+                <strong class="H-text-show-row-1">浦发银行</strong>
+                <div class="mag"></div>
+                <p class="H-text-show-row-2 H-font-size-14 H-color-999">人气爆款卡</p>
+                <div class="mag"></div>
+                <p class="H-text-show-row-2 H-font-size-14 H-color-999"><font class="H-color-ccc">868208人</font> 申请</p>
+            </div>
+        </div>
+
+        <div class="H-rich-item H-flexbox-horizontal H-padding10 H-background-white" tapmode="" onclick="H.openWin('zhongguo_head', '../../bank/zhongguo/zhongguok_head.html');">
+            <img src="../../../image/ka/zhongguo.png" class="li-img H-margin-right10" alt="" title="" />
+            <div class="li-text H-flex-item">
+                <strong class="H-text-show-row-1">中国银行</strong>
+                <div class="mag"></div>
+                <p class="H-text-show-row-2 H-font-size-14 H-color-999">长城环球通自由行信用卡</p>
+                <div class="mag"></div>
+                <p class="H-text-show-row-2 H-font-size-14 H-color-999"><font class="H-color-ccc">863288人</font> 申请</p>
+            </div>
+        </div>
+
+        <div class="H-rich-item H-flexbox-horizontal H-padding10 H-background-white" tapmode="" onclick="H.openWin('zhongguo_head', '../../bank/zhongguo/zhongguoh_head.html');">
+            <img src="../../../image/ka/gghq.png" class="li-img H-margin-right10" alt="" title="" />
+            <div class="li-text H-flex-item">
+                <strong class="H-text-show-row-1">中国银行</strong>
+                <div class="mag"></div>
+                <p class="H-text-show-row-2 H-font-size-14 H-color-999">长城环球通爱驾汽车卡</p>
+                <div class="mag"></div>
+                <p class="H-text-show-row-2 H-font-size-14 H-color-999"><font class="H-color-ccc">76288人</font> 申请</p>
+            </div>
+        </div>
+
+        <div class="H-rich-item H-flexbox-horizontal H-padding10 H-background-white" tapmode="" onclick="H.openWin('zhongguo_head', '../../bank/zhongguo/zhongguob_head.html');">
+            <img src="../../../image/ka/ggds.png" class="li-img H-margin-right10" alt="" title="" />
+            <div class="li-text H-flex-item">
+                <strong class="H-text-show-row-1">中国银行</strong>
+                <div class="mag"></div>
+                <p class="H-text-show-row-2 H-font-size-14 H-color-999">中银都市缤纷信用卡</p>
+                <div class="mag"></div>
+                <p class="H-text-show-row-2 H-font-size-14 H-color-999"><font class="H-color-ccc">96588人</font> 申请</p>
+            </div>
+        </div>
+
+        <div class="H-rich-item H-flexbox-horizontal H-padding10 H-background-white" tapmode="" onclick="H.openWin('zhongguo_head', '../../bank/zhongguo/zhongguoq_head.html');">
+            <img src="../../../image/ka/ggqq.png" class="li-img H-margin-right10" alt="" title="" />
+            <div class="li-text H-flex-item">
+                <strong class="H-text-show-row-1">中国银行</strong>
+                <div class="mag"></div>
+                <p class="H-text-show-row-2 H-font-size-14 H-color-999">中银银联腾讯视频联名卡</p>
+                <div class="mag"></div>
+                <p class="H-text-show-row-2 H-font-size-14 H-color-999"><font class="H-color-ccc">362288人</font> 申请</p>
+            </div>
+        </div>
+
+        <div class="H-rich-item H-flexbox-horizontal H-padding10 H-background-white" tapmode="" onclick="H.openWin('zhongguo_head', '../../bank/zhongguo/zhongguoj_head.html');">
+            <img src="../../../image/ka/ggtx.png" class="li-img H-margin-right10" alt="" title="" />
+            <div class="li-text H-flex-item">
+                <strong class="H-text-show-row-1">中国银行</strong>
+                <div class="mag"></div>
+                <p class="H-text-show-row-2 H-font-size-14 H-color-999">长城环球通万事达金卡</p>
+                <div class="mag"></div>
+                <p class="H-text-show-row-2 H-font-size-14 H-color-999"><font class="H-color-ccc">86937人</font> 申请</p>
+            </div>
+        </div>
+
+        <div class="H-rich-item H-flexbox-horizontal H-padding10 H-background-white" tapmode="" onclick="H.openWin('zhongxin_head', '../../bank/zhongxin/zhongxink_head.html');">
+            <img src="../../../image/ka/zhongxin.png" class="li-img H-margin-right10" alt="" title="" />
+            <div class="li-text H-flex-item">
+                <strong class="H-text-show-row-1">中信银行</strong>
+                <div class="mag"></div>
+                <p class="H-text-show-row-2 H-font-size-14 H-color-999">中信银联金卡</p>
+                <div class="mag"></div>
+                <p class="H-text-show-row-2 H-font-size-14 H-color-999"><font class="H-color-ccc">325808人</font> 申请</p>
+            </div>
+        </div>
+
+        <div class="H-rich-item H-flexbox-horizontal H-padding10 H-background-white" tapmode="" onclick="H.openWin('zhongxin_head', '../../bank/zhongxin/zhongxini_head.html');">
+            <img src="../../../image/ka/zhongxini.png" class="li-img H-margin-right10" alt="" title="" />
+            <div class="li-text H-flex-item">
+                <strong class="H-text-show-row-1">中信银行</strong>
+                <div class="mag"></div>
+                <p class="H-text-show-row-2 H-font-size-14 H-color-999">中信i白金信用卡</p>
+                <div class="mag"></div>
+                <p class="H-text-show-row-2 H-font-size-14 H-color-999"><font class="H-color-ccc">52808人</font> 申请</p>
+            </div>
+        </div>
+
+        <div class="H-rich-item H-flexbox-horizontal H-padding10 H-background-white" tapmode="" onclick="H.openWin('zhongxin_head', '../../bank/zhongxin/zhongxint_head.html');">
+            <img src="../../../image/ka/zhongxint.png" class="li-img H-margin-right10" alt="" title="" />
+            <div class="li-text H-flex-item">
+                <strong class="H-text-show-row-1">中信银行</strong>
+                <div class="mag"></div>
+                <p class="H-text-show-row-2 H-font-size-14 H-color-999">中信途牛银联金卡</p>
+                <div class="mag"></div>
+                <p class="H-text-show-row-2 H-font-size-14 H-color-999"><font class="H-color-ccc">23808人</font> 申请</p>
+            </div>
+        </div>
+
+        <div class="H-rich-item H-flexbox-horizontal H-padding10 H-background-white" tapmode="" onclick="H.openWin('zhongxin_head', '../../bank/zhongxin/zhongxinq_head.html');">
+            <img src="../../../image/ka/zhongxinq.png" class="li-img H-margin-right10" alt="" title="" />
+            <div class="li-text H-flex-item">
+                <strong class="H-text-show-row-1">中信银行</strong>
+                <div class="mag"></div>
+                <p class="H-text-show-row-2 H-font-size-14 H-color-999">中信Q享信用卡</p>
+                <div class="mag"></div>
+                <p class="H-text-show-row-2 H-font-size-14 H-color-999"><font class="H-color-ccc">34806人</font> 申请</p>
+            </div>
+        </div>
+
+        <div class="H-rich-item H-flexbox-horizontal H-padding10 H-background-white" tapmode="" onclick="H.openWin('zhongxin_head', '../../bank/zhongxin/zhongxiny_head.html');">
+            <img src="../../../image/ka/zhongxiny.png" class="li-img H-margin-right10" alt="" title="" />
+            <div class="li-text H-flex-item">
+                <strong class="H-text-show-row-1">中信银行</strong>
+                <div class="mag"></div>
+                <p class="H-text-show-row-2 H-font-size-14 H-color-999">中信悦卡信用卡</p>
+                <div class="mag"></div>
+                <p class="H-text-show-row-2 H-font-size-14 H-color-999"><font class="H-color-ccc">9638人</font> 申请</p>
+            </div>
+        </div>
+
+        <div class="H-rich-item H-flexbox-horizontal H-padding10 H-background-white" tapmode="" onclick="H.openWin('zhaoshang_head', '../../bank/zhaoshang/zhaoshangk_head.html');">
+            <img src="../../../image/ka/zhaoshang.jpg" class="li-img H-margin-right10" alt="" title="" />
+            <div class="li-text H-flex-item">
+                <strong class="H-text-show-row-1">招商银行</strong>
+                <div class="mag"></div>
+                <p class="H-text-show-row-2 H-font-size-14 H-color-999">银联单币信用卡</p>
+                <div class="mag"></div>
+                <p class="H-text-show-row-2 H-font-size-14 H-color-999"><font class="H-color-ccc">32896人</font> 申请</p>
+            </div>
+        </div>
+
+        <div class="H-rich-item H-flexbox-horizontal H-padding10 H-background-white" tapmode="" onclick="H.openWin('guangda_head', '../../bank/guangda/guangdak_head.html');">
+            <img src="../../../image/ka/guangda.jpg" class="li-img H-margin-right10" alt="" title="" />
+            <div class="li-text H-flex-item">
+                <strong class="H-text-show-row-1">光大银行</strong>
+                <div class="mag"></div>
+                <p class="H-text-show-row-2 H-font-size-14 H-color-999">阳光商旅信用卡金卡</p>
+                <div class="mag"></div>
+                <p class="H-text-show-row-2 H-font-size-14 H-color-999"><font class="H-color-ccc">589696人</font> 申请</p>
+            </div>
+        </div>
+
+        <div class="H-rich-item H-flexbox-horizontal H-padding10 H-background-white" tapmode="" onclick="H.openWin('guangda_head', '../../bank/guangda/guangdayk_head.html');">
+            <img src="../../../image/ka/gdyh.jpg" class="li-img H-margin-right10" alt="" title="" />
+            <div class="li-text H-flex-item">
+                <strong class="H-text-show-row-1">光大银行</strong>
+                <div class="mag"></div>
+                <p class="H-text-show-row-2 H-font-size-14 H-color-999">炎黄信用卡金卡</p>
+                <div class="mag"></div>
+                <p class="H-text-show-row-2 H-font-size-14 H-color-999"><font class="H-color-ccc">256696人</font> 申请</p>
+            </div>
+        </div>
+
+        <div class="H-rich-item H-flexbox-horizontal H-padding10 H-background-white" tapmode="" onclick="H.openWin('guangda_head', '../../bank/guangda/guangdab_head.html');">
+            <img src="../../../image/ka/gdbj.jpg" class="li-img H-margin-right10" alt="" title="" />
+            <div class="li-text H-flex-item">
+                <strong class="H-text-show-row-1">光大银行</strong>
+                <div class="mag"></div>
+                <p class="H-text-show-row-2 H-font-size-14 H-color-999">商旅白金信用卡</p>
+                <div class="mag"></div>
+                <p class="H-text-show-row-2 H-font-size-14 H-color-999"><font class="H-color-ccc">96526人</font> 申请</p>
+            </div>
+        </div>
+
+        <div class="H-rich-item H-flexbox-horizontal H-padding10 H-background-white" tapmode="" onclick="H.openWin('guangda_head', '../../bank/guangda/guangdav_head.html');">
+            <img src="../../../image/ka/gdv.jpg" class="li-img H-margin-right10" alt="" title="" />
+            <div class="li-text H-flex-item">
+                <strong class="H-text-show-row-1">光大银行</strong>
+                <div class="mag"></div>
+                <p class="H-text-show-row-2 H-font-size-14 H-color-999">VISA里约奥运信用卡</p>
+                <div class="mag"></div>
+                <p class="H-text-show-row-2 H-font-size-14 H-color-999"><font class="H-color-ccc">27596人</font> 申请</p>
+            </div>
+        </div>
+
+        <div class="H-rich-item H-flexbox-horizontal H-padding10 H-background-white" tapmode="" onclick="H.openWin('guangda_head', '../../bank/guangda/guangdas_head.html');">
+            <img src="../../../image/ka/gds.jpg" class="li-img H-margin-right10" alt="" title="" />
+            <div class="li-text H-flex-item">
+                <strong class="H-text-show-row-1">光大银行</strong>
+                <div class="mag"></div>
+                <p class="H-text-show-row-2 H-font-size-14 H-color-999">时尚cosmo信用卡</p>
+                <div class="mag"></div>
+                <p class="H-text-show-row-2 H-font-size-14 H-color-999"><font class="H-color-ccc">9696人</font> 申请</p>
+            </div>
+        </div>
+
+        <div class="H-rich-item H-flexbox-horizontal H-padding10 H-background-white" tapmode="" onclick="H.openWin('nongye_head', '../../bank/nongye/nongyek_head.html');">
+            <img src="../../../image/ka/nongye.jpg" class="li-img H-margin-right10" alt="" title="" />
+            <div class="li-text H-flex-item">
+                <strong class="H-text-show-row-1">农业银行</strong>
+                <div class="mag"></div>
+                <p class="H-text-show-row-2 H-font-size-14 H-color-999">厦航白鹭联名信用卡</p>
+                <div class="mag"></div>
+                <p class="H-text-show-row-2 H-font-size-14 H-color-999"><font class="H-color-ccc">69896人</font> 申请</p>
+            </div>
+        </div>
+
+    </div>
+    <p class="H-margin-bottom10 H-width100-percent H-auto-height"></p>
+    <!-- js -->
+    <script type="text/javascript" src="../../../script/H.js"></script>
+    <script type="text/javascript" src="../../../script/api.js"></script>
+    <script type="text/javascript">
+        H.ready(function () {
+            // 下拉刷新
+            H.setRefreshHeaderInfo(function (ret, err) {
+                setTimeout(function () {
+                    // 恢复下拉
+                    H.refreshHeaderLoadDone();
+                }, 2000);
+            });
+
+            // 打开页面自动下拉
+            H.refreshHeaderLoading();
+
+            // 下拉加载
+            H.scrolltobottom(function (ret, err) {
+                // 显示加载框
+                H.showProgress();
+                setTimeout(function () {
+                    H.hideProgress();
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>

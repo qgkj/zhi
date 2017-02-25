@@ -1,0 +1,459 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../css/aui/aui-win.css" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont/iconfont.css" />
+		<style type="text/css">
+			.display-none {
+				display: none;
+			}
+			#aui-footer .aui-iconfont {
+				font-size: 25px;
+			}
+			#aui-footer {
+				background: #f7f7f7;
+			}
+			#aui-footer:before {
+				content: "";
+				position: absolute;
+				top: 0px;
+				left: 0px;
+				right: 0px;
+				border-top: 1px solid #e2e2e2;
+				-webkit-transform: scaleY(.5);
+				-webkit-transform-origin: 0 0;
+			}
+			.aui-bar-1d9dd5 {
+				background: #4385f6;
+			}
+			.aui-bar-fff {
+				background: #fff;
+			}
+			#aui-footer li.active-1d9dd5, #aui-footer li.active-1d9dd5 span.iconfont {
+				color: #4385f6 !important;
+			}
+			.aui-nav .aui-bar-tab p {
+				font-size: 10px;
+			}
+			/* 滚动区域 */
+			.bbs-wrapper {
+				position: relative;
+				z-index: 1;
+				height: 45px;
+				width: 100%;
+				background: #fff;
+				overflow: hidden;
+				-ms-touch-action: none;
+			}
+			.bbs-wrapper:after {
+				border-bottom: 1px solid #d7d7d7;
+				content: "";
+				position: absolute;
+				bottom: 0px;
+				left: 0px;
+				right: 0px;
+				-webkit-transform: scaleY(.5);
+				-webkit-transform-origin: 0 0;
+			}
+			#scroller {
+				position: absolute;
+				z-index: 1;
+				height: 45px;
+			}
+			#scroller ul {
+				width: 100%;
+				display: -webkit-box;
+				-webkit-box-orient: horizontal;
+				box-sizing: border-box;
+				-webkit-box-sizing: border-box;
+				position: relative;
+			}
+			#scroller li {
+				width: 80px;
+				height: 45px;
+				line-height: normal;
+				font-size: 14px;
+				overflow: hidden;
+				text-align: center;
+				color: #000;
+				box-sizing: border-box;
+				-webkit-box-sizing: border-box;
+				display: -webkit-box;
+				-webkit-box-orient: horizontal;
+				-webkit-box-pack: center;
+				-webkit-box-align: center;
+				display: box;
+				box-orient: horizontal;
+				box-pack: center;
+				box-align: center;
+			}
+			#scroller li p {
+				color: #999999;
+				font-size: 13px;
+			}
+			#scroller li p span {
+				display: inline-block;
+				padding: 5px 5px;
+				background: #fff;
+				border-radius: 3px;
+				-webkit-border-radius: 3px;
+			}
+			#scroller li p.active span {
+				background: #4385f6;
+				color: #fff;
+			}
+			/* 滚动区域结束*/
+			#case-header {
+				color: #555;
+			}
+			#case-header span {
+				color: #888;
+			}
+			#case-header .aui-line-x {
+				margin-top: 46px;
+				width: 100%;
+				position: relative;
+				height: 1px;
+			}
+			#case-header  .aui-line-x:after {
+				border-bottom: 1px solid #f3f1f1;
+				display: block;
+				content: '';
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				-webkit-transform-origin: 0 0;
+				-webkit-transform: scale(1);
+				pointer-events: none;
+			}
+			.chat {
+				background: #8f8f94;
+				width: 45px;
+				height: 45px;
+				border-radius: 50%;
+				-webkit-border-radius: 50%;
+				line-height: 45px;
+				margin: 5px auto 0 auto;
+				text-align: center;
+			}
+			.chat i.aui-iconfont {
+				color: #fff !important;
+				line-height: 45px !important;
+				padding-top: 0 !important;
+			}
+			#aui-footer li.active-1d9dd5 .chat {
+				background: #4385f6;
+			}
+			.switch-bar {
+				position: relative;
+				display: inline-block;
+			}
+			.switch-bar span {
+				display: inline-block;
+				font-size: 13px;
+				border: 1px solid #fff;
+				width: 55px;
+				height: 25px;
+				line-height: 27px;
+				margin: 0;
+			}
+			.switch-bar span {
+				border-right: 0;
+			}
+			.switch-bar span:first-child {
+				border-right: 0;
+				border-radius: 4px 0 0 4px;
+				-webkit-border-radius: 4px 0 0 4px;
+			}
+			.switch-bar span:last-child {
+				border-radius: 0 4px 4px 0;
+				-webkit-border-radius: 0 4px 4px 0;
+				border-right: 1px solid #fff;
+			}
+			.switch-bar span.active {
+				background: #fff;
+				color: #4385f6;
+			}
+			.aui-bar .aui-title {
+				left: 70px;
+				right: 70px;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="aui-bar aui-bar-nav aui-bar-fff header" id='case-header'>
+			<a class="aui-pull-left" tapmode onclick="H.openSlidPane();"> <span class="aui-iconfont iconfont icon-more-menu H-theme11-color"></span> </a>
+			<div class="aui-title">
+				通道
+			</div>
+			<div class="aui-line-x"></div>
+		</header>
+		<header class="aui-bar aui-bar-nav aui-bar-1d9dd5 header display-none" id='mind-header'>
+			<a class="aui-pull-left" tapmode onclick="H.openSlidPane();"> <span class="aui-iconfont iconfont icon-more-menu H-theme2-color"></span> </a>
+			<div class="aui-title">
+				快速下款通道
+			</div>
+		</header>
+		<!-- <header class="aui-bar aui-bar-nav aui-bar-1d9dd5 header display-none" id='shop-header'>
+			<a class="aui-pull-left" tapmode onclick="H.openSlidPane();"> <span class="aui-iconfont iconfont icon-more-menu H-theme2-color"></span> </a>
+			<div class="aui-title">
+				商城
+			</div>
+			<a class="aui-pull-right" tapmode id="version"> <span class="aui-iconfont iconfont icon-huidaodingbu"></span> </a>
+		</header> -->
+		<header class="aui-bar aui-bar-nav aui-bar-1d9dd5 header display-none" id='ucenter-header'>
+			<a class="aui-pull-left" tapmode onclick="H.openSlidPane();"> <span class="aui-iconfont iconfont icon-more-menu H-theme2-color"></span> </a>
+			<div class="aui-title">
+				查询
+			</div>
+		</header>
+		<footer class="aui-nav" id="aui-footer">
+			<ul class="aui-bar-tab">
+				<li class="active-1d9dd5" data-header="case" tapmode>
+					<span class="aui-iconfont iconfont icon-gonggao"></span>
+					<p>
+						通道
+					</p>
+				</li>
+				<li data-header="mind" tapmode >
+					<span class="aui-iconfont iconfont icon-anli"></span>
+					<p>
+						快速下款通道
+					</p>
+				</li>
+				<!-- <li data-header="shop" tapmode >
+					<span class="aui-iconfont iconfont aui-icon-pay"></span>
+					<p>
+						商城
+					</p>
+				</li> -->
+				<li data-header="ucenter" tapmode >
+					<span class="aui-iconfont iconfont icon-sousuo"></span>
+					<p>
+						查询
+					</p>
+				</li>
+			</ul>
+		</footer>
+	</body>
+	<script type="text/javascript" src="../script/AHelper.js"></script>
+	<script type="text/javascript" src="../script/zepto.min.js"></script>
+	<script type="text/javascript" src="../script/iScroll5/iscroll.js"></script>
+	<script type="text/javascript">
+		var myScroll = null;
+		// 当前显示的frame名称
+		var currentFrameName = "case";
+		// name数字表示分类id
+		var bbs_Frams = [{
+			url : "./bbs/bbs_main_body.html",
+			name : "bbs_main_body" + 1,
+			pageParam : {
+				cid : 1
+			}
+		}, {
+			url : "./bbs/bbs_main_body.html",
+			name : "bbs_main_body" + 2,
+			pageParam : {
+				cid : 2
+			}
+		}, {
+			url : "./bbs/bbs_main_body.html",
+			name : "bbs_main_body" + 3,
+			pageParam : {
+				cid : 3
+			}
+		}, {
+			url : "./bbs/bbs_main_body.html",
+			name : "bbs_main_body" + 4,
+			pageParam : {
+				cid : 4
+			}
+		}, {
+			url : "./bbs/bbs_main_body.html",
+			name : "bbs_main_body" + 5,
+			pageParam : {
+				cid : 5
+			}
+		}, {
+			url : "./bbs/bbs_main_body.html",
+			name : "bbs_main_body" + 6,
+			pageParam : {
+				cid : 6
+			}
+		}];
+		// 首页frame组
+		var indexFrames = [];
+		// 设置指点迷津对应分类选中
+		function setBBSChannelChecked(index) {
+			var that = $("#scroller li").eq(index);
+			that.children("p").addClass("active").parent("li").siblings("li").children("p").removeClass("active");
+			myScroll.scrollToElement(that[0], 800);
+		}
+
+		// 隐藏所有的frame
+		function hideAllFrame(frameName) {
+			$("#aui-footer li").each(function() {
+				var headerId = $(this).attr("data-header");
+				if (frameName != headerId) {
+					if (headerId != "bbs" && headerId != "chat") {
+						// 设置所有的frame先隐藏起来
+						H.$setFrameStatus(headerId, true);
+					} else {
+						H.$setFrameGroupStatus(headerId, true);
+					}
+				} else {
+					if (headerId != "bbs" && headerId != "chat") {
+						// 直接显示出来
+						H.$setFrameStatus(headerId, false);
+					} else {
+						H.$setFrameGroupStatus(headerId, false);
+					}
+				}
+			});
+		}
+
+		// 显示对应frame
+		function showActiveFrame(index) {
+			var that = $("#aui-footer li").eq(index);
+			// 获取data-header存储的值
+			var headerId = that.attr("data-header");
+			// 对应的dom头部
+			var headerDOM = headerId + "-header";
+			that.addClass("active-1d9dd5").siblings().removeClass("active-1d9dd5");
+			// 设置当前显示的frame名称
+			currentFrameName = headerId;
+			// 设置状态栏白色沉浸问题
+			if (api.systemType == "android") {
+				if (headerId == "case") {
+					api.setStatusBarStyle({
+						color : 'rgba(0,0,0,0.1)'
+					});
+				} else {
+					api.setStatusBarStyle({
+						color : 'rgba(0,0,0,0)'
+					});
+				}
+			}
+			$("#" + headerDOM).removeClass("display-none").siblings(".header").addClass("display-none");
+			if (indexFrames.indexOf(headerId) == -1) {
+				// 是否是指点迷津，指点迷津是frameGroup
+				if (headerId != "bbs" && headerId != "chat") {
+					// 打开新的frame
+					H.$openFrameWithNav(headerDOM, {
+						url : "./" + headerId + "/" + headerId + "_body.html",
+						name : headerId
+					}, 'aui-footer');
+				} else {
+					// 指点迷津framegroup
+					if (headerId == "bbs") {
+						if (myScroll == null) {
+							// 滚动区域
+							myScroll = new IScroll('.bbs-wrapper', {
+								eventPassthrough : false,
+								scrollX : true,
+								scrollY : false,
+								preventDefault : true
+							});
+						}
+						H.$openFrameGroupWithNav(function(ret, err) {
+							setBBSChannelChecked(ret.index);
+						}, headerDOM, {
+							name : headerId,
+							frames : bbs_Frams,
+							scrollEnabled : true
+						}, 'aui-footer');
+					}
+					// 即时通讯frameGroup
+					else if (headerId == "chat") {
+						H.$openFrameGroupWithNav(function(ret, err) {
+						}, headerDOM, {
+							name : headerId,
+							frames : [{
+								url : './chat/chat_body.html',
+								name : headerId
+							}, {
+								url : './chat/chat_contact_body.html',
+								name : "chat_contact_body"
+							}, {
+								url : './chat/chat_qzone_body.html',
+								name : "chat_qzone_body"
+							}],
+							scrollEnabled : false
+						}, 'aui-footer');
+					}
+				}
+				// 添加到数组中，标识这个frame已经打开，下次直接显示出来，无需在打开
+				indexFrames.push(headerId);
+			}
+			// 隐藏所有
+			hideAllFrame(headerId);
+		}
+
+		Zepto(function($) {
+			$("#aui-footer li").on("tap", function() {
+				// 调用
+				showActiveFrame($(this).index());
+			});
+			// 点击切换
+			$("#scroller").on("tap", "li", function() {
+				var index = $(this).index();
+				setBBSChannelChecked(index);
+				// 设置索引
+				H.$setFrameGroupIndex('bbs', index);
+			});
+			// 搜索
+			$("#search-bbs").on("tap", function() {
+				// 快速打开窗口
+				H.$fixStatusBar(function(offset) {
+					H.$openFrame('search_bbs_body', './bbs/search_bbs_body.html', null, {
+						x : 0,
+						y : offset.h
+					});
+				}, 'bbs-header');
+			});
+		});
+		H.ready(function() {
+			showActiveFrame(0);
+			H.$getPrefs(function(ret, err) {
+				if (ret && ret.value) {
+					// 判断是否已登录
+					H.$getPrefs(function(ret, err) {
+						if (!ret.value) {
+							H.$openWin('login_head', './login/login_head.html');
+						}
+					}, 'user_info');
+				} 
+			});
+			// 双击退出应用，并清除缓存
+			H.$dblclickToCloseApp(function() {
+				H.$toast("祝您开心每一天");
+			});
+			if (api.systemType == "android") {
+				H.$viewappear(function(ret, err) {
+					if (currentFrameName == "case") {
+						api.setStatusBarStyle({
+							color : 'rgba(0,0,0,0.1)'
+						});
+					}
+				});
+				H.$viewdisappear(function(ret, err) {
+					api.setStatusBarStyle({
+						color : 'rgba(0,0,0,0)'
+					});
+				});
+			}
+		});
+		// $("#version").on("tap", function() {
+		// 		H.$openFrame('case_body', 'index_head.html', null, {
+		// 			x : 0,
+		// 			y : 0
+		// 		});
+		// 	});
+	</script>
+</html>

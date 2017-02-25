@@ -1,0 +1,205 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../../css/aui/aui.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/iconfont/iconfont.css" />
+		<script type="text/javascript" src="../../script/common.js"></script>
+		<script type="text/javascript" src="../../script/AHelper.js"></script>
+		<script type="text/javascript" src="../../script/zepto.min.js"></script>
+		<script type="text/javascript" src="../../script/mcm/SHA1.js"></script>
+		<script type="text/javascript" src="../../script/mcm/api.js"></script>
+		<style type="text/css">
+			html, body {
+				background: rgba(0,0,0,0);
+			}
+			body {
+				background: url(../../image/ucenter_bg.png) no-repeat left top;
+				background-size: cover;
+				-webkit-background-size: cover;
+			}
+			.top-area {
+			}
+			.logo {
+				height: 120px;
+				display: -webkit-box;
+				-webkit-box-orient: horizontal;
+				-webkit-box-pack: center;
+				-webkit-box-align: center;
+				display: box;
+				box-orient: horizontal;
+				box-pack: center;
+				box-align: center;
+			}
+			.login-area {
+				text-align: center;
+				white-space: nowrap;
+			}
+			.login-area img {
+				width: 75px;
+				height: 75px;
+				border-radius: 8px;
+				-webkit-border-radius: 8px;
+			}
+			.login-area p {
+				padding: 5px 0 0 0;
+				font-size: 15px;
+				color: #fff;
+			}
+			.form {
+				padding: 0 30px;
+			}
+			.form-row {
+				display: -webkit-box;
+				display: -webkit-flex;
+				display: flex;
+				-webkit-box-orient: horizontal;
+				-webkit-flex-flow: row;
+				flex-flow: row;
+				width: 100%;
+				padding: 15px;
+				border-bottom: 1px solid #3e8dce;
+			}
+			.form-row span {
+				display: block;
+				width: 50px;
+				color: rgba(255,255,255,0.7);
+			}
+			.form-row span {
+				font-size: 22px;
+			}
+			.form-row .input-box {
+				-webkit-box-flex: 1;
+				-webkit-flex: 1;
+				flex: 1;
+				padding-top: 2px;
+			}
+			.form-row .input-box input {
+				background: rgba(0,0,0,0);
+				border: none;
+				outline: none;
+				color: rgba(255,255,255,0.9);
+				padding: 4px;
+				margin: 0;
+			}
+			.form-btn {
+				padding: 30px 30px 15px 30px;
+			}
+			.aui-btn-4385f6 {
+				background: #4385f6 !important;
+				color: #f9f9f9 !important;
+				border: none;
+				outline: none;
+			}
+			.form-btn button:active {
+				background: rgba(67,133,246,0.8) !important;
+			}
+			.getcode {
+				color: #fff;
+				line-height: 33px;
+			}
+			.showpwd {
+				color: #fff;
+				line-height: 33px;
+				font-size: 20px;
+			}
+			.form-o {
+				padding: 0 30px;
+			}
+			.form-o span {
+				float: left;
+				color: #f9f9f9;
+				font-size: 13px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="top-area">
+			<div class="logo">
+				<div class="login-area"></div>
+			</div>
+			<div class="logo"></div>
+			
+				<div class="form-row">
+					<span class="iconfont icon-phone H-theme10-color">&nbsp;&nbsp;|</span>
+					<div class="input-box">
+						<input class="H-theme10-color" type="number" name="re-phone" id="re-phone" value="" placeholder="请输入手机号" />
+					</div>
+				</div>
+				<div class="form-row">
+					<span class="iconfont icon-password H-theme10-color">&nbsp;&nbsp;|</span>
+					<div class="input-box">
+						<input class="H-theme10-color" type="password" name="re-password" id="re-password" value="" placeholder="请输入密码" />
+					</div>
+				</div>
+				<div class="form-row">
+					<span class="iconfont icon-password H-theme10-color">&nbsp;&nbsp;|</span>
+					<div class="input-box">
+						<input class="H-theme10-color" type="password" name="re-doPassword" id="re-doPassword" value="" placeholder="请输入密码" />
+					</div>
+				</div>
+			
+			<div class="form-btn">
+				<input type="submit" value="注册" class="aui-btn aui-btn-4385f6 aui-btn-block" tapmode="active" onclick="funReg( this );">
+			</div>
+			</div>
+	</body>
+	<script type="text/javascript">
+	apiready = function(){
+		$api.skin();
+		$api.removeCls( $api.dom( '.'+api.winName ), 'none' );
+		if( api.winName == 'personl-frm' ){
+			funEachData( $api.getStorage( 'user' ) );
+		}
+	}
+	
+		function funReg(tag) {
+			if (! $api.hasCls(tag, 'disabled')) {
+				var phone = $api.dom('#re-phone');
+				var password = $api.dom('#re-password');
+				var doPassword = $api.dom('#re-doPassword');
+				if (!$api.val(phone)) {
+					$api.toast('手机不能为空！');
+				} else if (! /^1\d{10}$/.exec($api.val(phone))) {
+					$api.toast('手机格式有误！( 11位数字 )');
+				} else if (!$api.val(password)) {
+					$api.toast('密码不能为空！');
+				} else if (!$api.val(doPassword)) {
+					$api.toast('请确认密码');
+				} else if ($api.val(password) != $api.val(doPassword)) {
+					$api.toast('确认密码不一致');
+				} else {
+					$api.addCls(tag, 'disabled');
+					setTimeout(function() {
+						$api.removeCls(tag, 'disabled');
+					}, 5000);
+					var bodyParam = {
+						username : $api.val(phone),
+						password : $api.val(password)
+					}
+					$api.ajax('/user/', 'post', bodyParam, function(ret, err) {
+						if (ret) {
+							api.execScript({
+								name : 'login-frm',
+								frameName : 'login-frm',
+								script : 'funPhoneIni( ' + $api.val(phone) + ' );'
+							});
+							showAlert('注册成功！');
+							api.closeWin();
+						} else {
+							$api.toast(err.msg);
+							showAlert('注册失败！');
+						}
+						$api.removeCls(tag, 'disabled');
+					});
+				}
+			}
+		};
+		function funPhoneIni(ht) {
+			$api.dom('#lo-phone').value = ht;
+		};
+	</script>
+</html>

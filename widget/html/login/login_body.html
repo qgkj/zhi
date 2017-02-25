@@ -1,0 +1,310 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../../css/aui/aui.css" />
+    <link rel="stylesheet" href="../../css/aui-win.css">
+    <link rel="stylesheet" type="text/css" href="../../css/iconfont/iconfont.css" />
+    <script type="text/javascript" src="../../script/common.js"></script>
+    <script type="text/javascript" src="../../script/mcm/SHA1.js"></script>
+    <script type="text/javascript" src="../../script/mcm/api.js"></script>
+    <style type="text/css">
+      html, body {
+        background: rgba(0,0,0,0);
+      }
+      body {
+        background: url(../../image/ucenter_bg.png) no-repeat left top;
+        background-size: cover;
+        -webkit-background-size: cover;
+      }
+      .top-area {
+      }
+      .logo {
+        height: 170px;
+        display: -webkit-box;
+        -webkit-box-orient: horizontal;
+        -webkit-box-pack: center;
+        -webkit-box-align: center;
+        display: box;
+        box-orient: horizontal;
+        box-pack: center;
+        box-align: center;
+      }
+      .login-area {
+        text-align: center;
+      }
+      .login-area img {
+        width: 150px;
+        height: 50px;
+        border-radius: 8px;
+        -webkit-border-radius: 8px;
+      }
+      .login-area p {
+        padding: 5px 0 0 0;
+        font-size: 18px;
+        color: #fff;
+      }
+      .form {
+        padding: 0 30px;
+      }
+      .form-row {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-flex-flow: row;
+        flex-flow: row;
+        width: 100%;
+        padding: 15px;
+        border-bottom: 1px solid #3e8dce;
+      }
+      .form-row span {
+        display: block;
+        width: 50px;
+        color: rgba(255,255,255,0.7);
+      }
+      .form-row span {
+        font-size: 22px;
+      }
+      .form-row .input-box {
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+        flex: 1;
+        padding-top: 2px;
+      }
+      .form-row .input-box input {
+        background: rgba(0,0,0,0);
+        border: none;
+        outline: none;
+        color: rgba(255,255,255,0.9);
+        padding: 4px;
+        margin: 0;
+      }
+      .form-btn {
+        padding: 30px 30px 15px 30px;
+      }
+      .aui-btn-4385f6 {
+        background: #4385f6 !important;
+        color: #f9f9f9 !important;
+        border: none;
+        outline: none;
+      }
+      .form-btn button:active {
+        background: rgba(67,133,246,0.8) !important;
+      }
+      .form-o {
+        padding: 0 30px;
+      }
+      .form-o span {
+        float: left;
+        color: #f9f9f9;
+      }
+      .form-o span:last-child {
+        float: right;
+      }
+      .form-otherlogin {
+        clear: both;
+        padding: 0 30px;
+        height: 150px;
+      }
+      .sdk-list {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-flex-flow: row;
+        flex-flow: row;
+      }
+      .sdk-list  p {
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+        flex: 1;
+      }
+      .sdk-list p span {
+        display: block;
+        width: 50px;
+        height: 50px;
+        background: #dce5ea;
+        border-radius: 50%;
+        -webkit-border-radius: 50%;
+        display: -webkit-box;
+        -webkit-box-orient: horizontal;
+        -webkit-box-pack: center;
+        -webkit-box-align: center;
+        display: box;
+        box-orient: horizontal;
+        box-pack: center;
+        box-align: center;
+      }
+      .sdk-list p span i {
+        color: #114e6f;
+        font-size: 30px;
+      }
+      .sdk-list p:nth-child(2) {
+        display: -webkit-box;
+        -webkit-box-orient: horizontal;
+        -webkit-box-pack: center;
+        display: box;
+        box-orient: horizontal;
+        box-pack: center;
+      }
+      .float-left {
+        float: left;
+      }
+      .float-right {
+        float: right;
+      }
+      .sdk-txt {
+        color: #a6b5c0;
+        text-align: center;
+        padding: 10px 0 30px 0;
+      }
+      .kg{
+        height: 30px;
+        display: -webkit-box;
+      }
+    </style>
+<!--     <script type="text/javascript">
+    var mcm = null;
+    var user = null;
+    
+    apiready = function(){
+        mcm = api.require('model');
+        user = api.require('user');
+        //在线编译正式版时，可以不用配置,APICloud会取当前应用的配置
+        mcm.config({
+          appId:"A6915918961135", 
+          appKey:"02E0067E-57AF-1EBB-12AF-05666A9278D4", 
+          url:'https://d.apicloud.com'
+        });
+      }
+
+    function mcm_login(){
+      var uname = value('username');
+      var psw = value('password');
+      if(!uname){
+        showAlert("请输入账号");
+        return;
+      }
+      if(!psw){
+        showAlert("请输入密码");
+        return;
+      }
+      loading();
+      user.login({username:uname, password:psw}, function(ret, err){
+        finishing();
+        if(ret){
+          if(ret.userId){
+            showAlert('登录成功！');//登录成功将返回用户基本信息
+            H.$openFrame('index_head','../index_head.html');
+          }else{
+            showAlert(JSON.stringify(ret));
+          }
+        }else{
+          if(err.statusCode && 401 == err.statusCode){
+            showAlert('登录失败，用户名或密码错误');//401验证失败
+          }else{
+            showAlert("登录发生错误：\n" + JSON.stringify(err));
+          }
+        }
+      });
+    }
+  </script> -->
+  </head>
+  <body>
+    <div class="top-area">
+    <div class="kg"></div>
+      <div class="logo">
+
+      </div>
+      
+        <div class="form">
+        <div class="form-area">
+          <div class="form-row">
+            <span class="iconfont icon-phone H-theme10-color">&nbsp;&nbsp;|</span>
+            <div class="input-box">
+              <input class="H-theme10-color" type="number" name="lo-phone" id="lo-phone" value="" placeholder="请输入手机号" />
+            </div>
+          </div>
+          <div class="form-row">
+            <span class="iconfont icon-password H-theme10-color">&nbsp;&nbsp;|</span>
+            <div class="input-box">
+              <input class="H-theme10-color" type="password" name="lo-password" id="lo-password" value="" placeholder="请输入密码" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-btn">        
+        <input type="submit" value="登录" class="aui-btn aui-btn-4385f6 aui-btn-block" tapmode="active" onclick="funLog( this );">
+      </div>
+      
+      <div class="form-o">
+        <span class="H-theme10-color" tapmode onclick="H.$openWin('reg_head','reg_head.html');">注册账号</span>
+        <span class="H-theme10-color" onclick="H.$openWin('forgetPwd_head','forgetPwd_head.html');">忘记密码？</span>
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript" src="../../script/AHelper.js"></script>
+  <script type="text/javascript" src="../../script/zepto.min.js"></script>
+  <script type="text/javascript" src="../../script/config.js"></script>
+  <script type="text/javascript">
+    apiready = function(){
+    $api.skin();
+    checklogin();
+  }
+  
+  function funLog( tag ){
+    if( ! $api.hasCls( tag ,'disabled' ) ){
+      var phone = $api.dom('#lo-phone');
+      var password = $api.dom('#lo-password');
+      if( !$api.val( phone ) ){
+        $api.toast( '手机不能为空！' );
+      }else if(  !$api.val( password )  ){
+        $api.toast( '密码不能为空！' );
+      }else{
+        $api.addCls( tag, 'disabled' );
+        setTimeout(function(){
+          $api.removeCls( tag, 'disabled' );
+        },5000);
+        var bodyParam = {
+          username: $api.val( phone ),
+          password: $api.val( password )
+        }
+
+
+        $api.ajax('/user/login', 'post', bodyParam, function (ret, err) {
+          if (ret) {
+            var ac = $api.dom('#lo-phone');
+            var de = ret.userId ;
+            $api.setStorage('key',de);
+            api.execScript();
+            
+            api.setPrefs({    key: de,    value: '1'});
+
+            //showAlert('登录成功！'+ JSON.stringify(ret));//登录成功将返回用户基本信息
+            H.$openFrame('index_head','../index_head.html');
+          } else {
+            $api.toast( err.msg );
+          }
+          $api.removeCls( tag, 'disabled' );
+        });
+      
+      };
+    };
+  };
+
+  function checklogin(){
+     //获取登录时候存储的值
+                var UserID=api.getPrefs({sync: true, key: 'UserID' });
+                if(UserID<=0){
+                     //这里↓跳转登录页面
+                     H.$openFrame('index_head','../index_head.html');
+                }
+                //这里↓写登录后需要跳转的页面
+               // H.$openFrame('index_head','../index_head.html');
+  }
+  </script>
+</html>

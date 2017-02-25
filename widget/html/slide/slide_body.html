@@ -1,0 +1,221 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../../css/aui/aui.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/iconfont/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/winu-ui.css" />
+		<style type="text/css">
+			html, body {
+				background: rgba(0,0,0,0);
+			}
+			body {
+				background: #fff url(../../image/slide_bg.png) no-repeat right bottom;
+				background-size: 100% auto;
+				-webkit-background-size: 100% auto;
+				position: relative;
+			}
+			.aui-list-view {
+				background: rgba(0,0,0,0);
+				color: #909193;
+			}
+			.aui-content {
+				margin: 0;
+				overflow-x: auto;
+			}
+			.aui-list-view-cell:after, .aui-list-view:after, .aui-list-view-cell:last-child:after {
+				border: none;
+			}
+			.aui-list-view-cell:active {
+				background: rgba(0,0,0,0.1);
+			}
+			.aui-arrow-right:after {
+				color: #b9b9ba;
+			}
+			.aui-list-view i.aui-iconfont {
+				color: #b9b9ba;
+				font-size: 19px;
+			}
+			.user-info {
+				height: 100px;
+				margin: 0 10px 10px 10px;
+				display: -webkit-box;
+				-webkit-box-orient: horizontal;
+				-webkit-box-align: center;
+				display: box;
+				box-orient: horizontal;
+				box-align: center;
+				background: rgba(0,0,0,0);
+				position: relative;
+				overflow:hidden;
+			}
+			.user-info:after {
+				border-bottom: 1px solid #e7e2e2;
+				content: "";
+				position: absolute;
+				bottom: 0px;
+				left: 0px;
+				right: 0px;
+				-webkit-transform: scaleY(.5);
+				-webkit-transform-origin: 0 0;
+			}
+			.img-container {
+				margin-right: 10px;
+				width: 50px;
+				height: 50px;
+				overflow: visible;
+				position: relative;
+			}
+			.user-info img {
+				width: 50px;
+				height: 50px;
+				border-radius: 50%;
+				-webkit-border-radius: 50%;
+				vertical-align: middle;
+				vertical-align: middle;
+			}
+			.img-container .gender {
+				display: block;
+				height: 15px;
+				width: 15px;
+				border-radius: 50%;
+				-webkit-border-radius: 50%;
+				color: #fff;
+				position: absolute;
+				right: 0;
+				bottom: 0;
+				text-align: center;
+			}
+			.img-container .gender i {
+				font-size: 10px;
+				position: relative;
+				top: -6px;
+			}
+			.img-container .gender.man {
+				background: #1d9dd5;
+			}
+			.img-container .gender.max {
+				background: #f54171;
+			}
+			.user-account {
+				text-align: left;
+			}
+			.user-account span {
+				display: block;
+				color: #fff;
+			}
+			.user-account span:last-child {
+				color: #b9b9ba;
+				margin-top: 5px;
+				font-size: 13px;
+			}
+			.settings, .themb {
+				left: 15px;
+				bottom: 10px;
+				z-index: 100;
+				height: 32px;
+				color: #b9b9ba;
+			}
+			.themb {
+				left: auto;
+				right: 15px;
+			}
+			.settings span, .themb span {
+				font-size: 19px;
+				color: #ccc;
+				margin-right: 8px;
+			}
+			.level {
+				display: inline-block;
+				vertical-align: middle;
+				font-size: 9px;
+				color: #fff;
+				background: #96d2f7;
+				height: 15px;
+				line-height: 16px;
+				padding: 0 4px;
+				border-radius: 2px;
+				-webkit-border-radius: 2px;
+				margin-left: 10px;
+			}
+			.btn-bar {
+				height: 40px;
+			}
+			.aui-ellipsis-1 {
+				padding-right: 0;
+				display: block;
+			}
+		</style>
+	</head>
+	<body class="winu-flex-box-vertical" id="bdy">
+		<div class="user-info">
+			<div class="img-container">
+				<img src="../../image/pic.jpg" />
+				<span class="gender man"><i class="iconfont icon-nan"></i></span>
+			</div>
+			<div class="user-account">
+				<span>帮分期</span>
+				<span class="aui-ellipsis-1">是人都能下贷款！</span>
+			</div>
+		</div>
+		<div class="aui-content winu-flex-item">
+			<ul class="aui-list-view aui-in" id="case-function-list">
+				<li class="aui-list-view-cell" tapmode data-funcName="banka">
+					<div class="aui-arrow-right">
+						<i class="aui-iconfont iconfont icon-buju"></i>办卡
+					</div>
+				</li>
+				<li class="aui-list-view-cell" tapmode data-funcName="daikuan">
+					<div class="aui-arrow-right">
+						<i class="aui-iconfont iconfont icon-wangpan"></i>贷款
+					</div>
+				</li>
+				<li class="aui-list-view-cell" tapmode data-funcName="tie">
+					<div class="aui-arrow-right">
+						<i class="aui-iconfont iconfont icon-luyinbi"></i>提额
+					</div>
+				</li>
+				<li class="aui-list-view-cell" tapmode data-funcName="chongzhi">
+					<div class="aui-arrow-right">
+						<i class="aui-iconfont iconfont icon-pengyouquanyin"></i>充值
+					</div>
+				</li>
+				<li class="aui-list-view-cell" tapmode data-funcName="kefu">
+					<div class="aui-arrow-right">
+						<i class="aui-iconfont iconfont icon-qq"></i>客服
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="btn-bar"></div>
+		<div class="settings winu-position-absolute" >
+			<span class="aui-iconfont iconfont icon-exit-door"></span> 退出
+		</div>
+	</body>
+	<script type="text/javascript" src="../../script/AHelper.js"></script>
+	<script type="text/javascript" src="../../script/zepto.min.js"></script>
+	<script type="text/javascript">
+		Zepto(function() {
+			$("#case-function-list").on("tap", "li", function() {
+				var funcName = $(this).attr("data-funcName");
+				H.$openWin(funcName, '../case/' + funcName + '/' + funcName + '.html');
+			});
+			$(".settings").on("tap", function() {
+				H.$removePrefs(null, 'user_info');
+				H.$toast("退出成功");
+				setTimeout(function() {
+					H.$openWin('login_head', '../login/login_head.html');
+				}, 1000);
+			});
+		});
+		H.ready(function() {
+			H.$fixStatusBar(function(offset) {
+				$("body").css("width", api.winWidth - 80);
+				$(".user-account").css("width", api.winWidth - 160);
+			}, 'bdy');
+		});
+	</script>
+</html>

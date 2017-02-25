@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>帮分期</title>
+	<link rel="stylesheet" href="../../../css/Hui.css">
+	<link rel="stylesheet" href="../../../css/ziti.css">
+    <link rel="stylesheet" href="../../../css/bank/demo.css">
+    <link rel="stylesheet" href="../../../css/bank/iconfont.css">
+</head>
+<body>
+<div class="H-func-menu-list H-flexbox-horizontal H-background-white">
+        <div class="H-func-menu-item H-flex-item H-text-horizontal-center H-vertical-padding10" tapmode="" onclick="H.openWin('shanghai_head', '../../bank/shanghai/shanghai_head.html');">
+            <span class="H-icon H-theme1-bg H-center-all H-border-radius-circle H-block-margin-auto icon-iconfont icon-shanghai H-theme11-color">
+                <span class="path1"></span><span class="path2"></span>
+            </span>
+            <p class="H-font-size-13 H-margin-top5">上海银行</p>
+        </div>
+        <div class="H-func-menu-item H-flex-item H-text-horizontal-center H-vertical-padding10" tapmode="" onclick="H.openWin('beijing_head', '../../bank/beijing/beijing_head.html');">
+            <span class="H-icon H-theme2-bg H-center-all H-border-radius-circle H-block-margin-auto"><i class="icon-iconfont icon-beijing H-theme11-color"></i></span>
+            <p class="H-font-size-13 H-margin-top5">北京银行</p>
+        </div>
+        <div class="H-func-menu-item H-flex-item H-text-horizontal-center H-vertical-padding10" tapmode="" onclick="H.openWin('daxin_head', '../../bank/daxin/daxin_head.html');">
+            <span class="H-icon H-theme3-bg H-center-all H-border-radius-circle H-block-margin-auto icon-iconfont icon-daxin H-theme11-color">
+                <span class="path1"></span><span class="path2"></span>
+            </span>
+            <p class="H-font-size-13 H-margin-top5">大新银行</p>
+        </div>
+        <div class="H-func-menu-item H-flex-item H-text-horizontal-center H-vertical-padding10" tapmode="" onclick="H.openWin('zhada_head', '../../bank/zhada/zhada_head.html');">
+            <span class="H-icon H-theme4-bg H-center-all H-border-radius-circle H-block-margin-auto"><i class="icon-iconfont icon-zhada H-theme11-color"></i></span>
+            <p class="H-font-size-13 H-margin-top5">渣打银行</p>
+        </div>
+        <div class="H-func-menu-item H-flex-item H-text-horizontal-center H-vertical-padding10" tapmode="" onclick="H.openWin('xingye_head', '../../bank/xingye/xingye_head.html');">
+            <span class="H-icon H-theme5-bg H-center-all H-border-radius-circle H-block-margin-auto"><i class="icon-iconfont icon-xingye H-theme11-color"></i></span>
+            <p class="H-font-size-13 H-margin-top5">兴业银行</p>
+        </div>
+</div>
+<div class="H-func-menu-list H-flexbox-horizontal H-background-white">
+        <div class="H-func-menu-item H-flex-item H-text-horizontal-center H-vertical-padding10" tapmode="" onclick="H.openWin('nongye_head', '../../bank/nongye/nongye_head.html');">
+            <span class="H-icon H-theme5-bg H-center-all H-border-radius-circle H-block-margin-auto"><i class="icon-iconfont icon-nongye H-theme11-color"></i></span>
+            <p class="H-font-size-13 H-margin-top5">农业银行</p>
+        </div>
+        <div class="H-func-menu-item H-flex-item H-text-horizontal-center H-vertical-padding10" tapmode="" onclick="H.openWin('huaxia_head', '../../bank/huaxia/huaxia_head.html');">
+            <span class="H-icon H-theme4-bg H-center-all H-border-radius-circle H-block-margin-auto"><i class="icon iconfont icon-huaxiayinxing H-theme11-color"></i></span>
+            <p class="H-font-size-13 H-margin-top5">华夏银行</p>
+        </div>
+        <div class="H-func-menu-item H-flex-item H-text-horizontal-center H-vertical-padding10" tapmode="" onclick="H.openWin('gongshang_head', '../../bank/gongshang/gongshang_head.html');">
+            <span class="H-icon H-theme3-bg H-center-all H-border-radius-circle H-block-margin-auto"><i class="icon iconfont icon-tongdao H-theme11-color"></i></span>
+            <p class="H-font-size-13 H-margin-top5">浙商银行</p>
+        </div>
+        <div class="H-func-menu-item H-flex-item H-text-horizontal-center H-vertical-padding10" tapmode="" onclick="H.openWin('jianshe_head', '../../bank/jianshe/jianshe_head.html');">
+            <span class="H-icon H-theme2-bg H-center-all H-border-radius-circle H-block-margin-auto"><i class="icon iconfont icon-zhongguojiansheyinxing H-theme11-color"></i></span>
+            <p class="H-font-size-13 H-margin-top5">建设银行</p>
+        </div>
+        <div class="H-func-menu-item H-flex-item H-text-horizontal-center H-vertical-padding10" tapmode="" onclick="H.openWin('huaqi_head', '../../bank/huaqi/huaqi_head.html');">
+            <span class="H-icon H-theme1-bg H-center-all H-border-radius-circle H-block-margin-auto"><i class="icon-iconfont icon-huaqi H-theme11-color"></i></span>
+            <p class="H-font-size-13 H-margin-top5">花旗银行</p>
+        </div>
+</div>
+    
+    <p class="H-margin-bottom10 H-width100-percent H-auto-height"></p>
+    <!-- js -->
+    <script type="text/javascript" src="../../../script/H.js"></script>
+    <script type="text/javascript" src="../../../script/api.js"></script>
+    <script type="text/javascript">
+        H.ready(function () {
+            // 下拉刷新
+            H.setRefreshHeaderInfo(function (ret, err) {
+                setTimeout(function () {
+                    // 恢复下拉
+                    H.refreshHeaderLoadDone();
+                }, 2000);
+            });
+
+            // 打开页面自动下拉
+            H.refreshHeaderLoading();
+
+            // 下拉加载
+            H.scrolltobottom(function (ret, err) {
+                // 显示加载框
+                H.showProgress();
+                setTimeout(function () {
+                    H.hideProgress();
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>

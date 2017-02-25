@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>首页</title>
+    <link rel="stylesheet" type="text/css" href="../../../../../css/api.css" />
+    <script type="text/javascript" src="../../../../../script/public.js"></script>
+    <style>       
+        .tab-item {
+            height:50px;
+            -webkit-box-flex:1;
+            display:-webkit-box;
+            -webkit-box-orient:vertical;
+            -webkit-box-pack:center;
+            -webkit-box-align:center;
+        }
+        
+        center{
+            color:#FFF;
+            margin-top:3px;
+            font-size:0.7em;
+        }
+        
+        .active {
+            background-color:#33B5E5; 
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <div id="main">
+                
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    var home = 'http://www.huifenqi.com/';
+    apiready = function(){
+        //使用margin布局，自动适应任何屏幕，适配带虚拟菜单栏的任意Android手机
+        var area = {
+            marginTop:63,//标题栏高度44
+        }
+        api.openFrame({
+            name: 'frame',
+            url: home,
+            bounces: false,
+            rect: area,
+            progress:{//设置进度条类型和样式
+                type:'page',
+                color:'#45C01A'
+            }
+        });
+        //监听Android back键，回退历史记录
+        api.addEventListener({
+            name:'keyback'
+        },function(ret,err){
+            GoToHisBack();
+        });
+        //设置名为frame的Frame事件监听
+        api.setFrameClient({
+            frameName:'frame'
+        },function(ret){
+            onFrameStateChange(ret);
+        });
+    };
+    
+    function onFrameStateChange(ret){
+        if(0 == ret.state){//frame开始加载
+            //var url = ret.url;
+            //console.log('frame loading start: ' + url);
+        }else if(1 == ret.state){//frame加载进度发生变化
+            //var p = ret.progress;
+            //console.log('frame loading: ' + p);
+        }else if(2 == ret.state){//frame结束加载
+            //var url = ret.url;
+            //console.log('frame loading finish: ' + url);
+        }
+    }    
+</script>
+</html>

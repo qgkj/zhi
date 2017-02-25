@@ -1,0 +1,208 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../../css/aui/aui.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/iconfont/iconfont.css" />
+		<script type="text/javascript" src="../../script/common.js"></script>
+    	<script type="text/javascript" src="../../script/api.js"></script>
+		<style type="text/css">
+			html, body {
+				background: rgba(0,0,0,0);
+			}
+			body {
+			}
+			.top-area {
+			}
+			.logo {
+				height: 150px;
+				display: -webkit-box;
+				-webkit-box-orient: horizontal;
+				-webkit-box-pack: center;
+				-webkit-box-align: center;
+				display: box;
+				box-orient: horizontal;
+				box-pack: center;
+				box-align: center;
+			}
+			.login-area {
+				text-align: center;
+				white-space: nowrap;
+			}
+			.login-area img {
+				width: 75px;
+				height: 75px;
+				border-radius: 8px;
+				-webkit-border-radius: 8px;
+			}
+			.login-area p {
+				padding: 5px 0 0 0;
+				font-size: 15px;
+				color: #fff;
+			}
+			.form {
+				padding: 0 30px;
+			}
+			.form-row {
+				display: -webkit-box;
+				display: -webkit-flex;
+				display: flex;
+				-webkit-box-orient: horizontal;
+				-webkit-flex-flow: row;
+				flex-flow: row;
+				width: 100%;
+				padding: 15px;
+				border-bottom: 1px solid #3e8dce;
+			}
+			.form-row span {
+				display: block;
+				width: 50px;
+				color: rgba(255,255,255,0.7);
+			}
+			.form-row span {
+				font-size: 22px;
+			}
+			.form-row .input-box {
+				-webkit-box-flex: 1;
+				-webkit-flex: 1;
+				flex: 1;
+				padding-top: 2px;
+			}
+			.form-row .input-box input {
+				background: rgba(0,0,0,0);
+				border: none;
+				outline: none;
+				color: rgba(255,255,255,0.9);
+				padding: 4px;
+				margin: 0;
+			}
+			.form-btn {
+				padding: 30px 30px 15px 30px;
+			}
+			.aui-btn-4385f6 {
+				background: #4385f6 !important;
+				color: #f9f9f9 !important;
+				border: none;
+				outline: none;
+			}
+			.form-btn button:active {
+				background: rgba(67,133,246,0.8) !important;
+			}
+			.getcode {
+				color: #fff;
+				line-height: 33px;
+			}
+			.showpwd {
+				color: #fff;
+				line-height: 33px;
+				font-size:20px;
+			}
+			.form-o {
+				padding: 0 30px;
+			}
+			.form-o span {
+				float: left;
+				color: #f9f9f9;
+				font-size:13px;
+			}
+		</style>
+		<script type="text/javascript">
+    var mcm = null;
+    var user = null;
+    
+    apiready = function(){
+        mcm = api.require('model');
+        query = api.require('query');
+        //在线编译正式版时，可以不用配置,APICloud会取当前应用的配置
+        mcm.config({
+          appId:"A6915918961135", 
+          appKey:"02E0067E-57AF-1EBB-12AF-05666A9278D4", 
+          url:'https://d.apicloud.com'
+        });
+      }
+
+		function mcm_findById(){
+			var clazz = "vcode";
+			var rowId = value('id');
+			if(!rowId){
+        		showAlert("请输入邀请码");
+        		return;
+      		}
+      		loading();
+			var param = {class:clazz, id:rowId};
+			mcm.exist(param, function(ret, err){
+				finishing();
+        if(ret.id){
+          	showAlert('邀请码正确！');//登录成功将返回用户基本信息
+            H.$openFrame('reg_head','reg_head.html');
+        }else{
+          showAlert('邀请码不正确！');
+        }
+			});
+		}
+
+
+    function mcm_login(){
+      var vcode = value('vcode');
+
+      if(!vcode){
+        showAlert("请输入邀请码");
+        return;
+      }
+      loading();
+      user.login({
+      	vcode:vcode
+      }, function(ret, err){
+        finishing();
+        if(ret){
+          if(ret.userId){
+            showAlert('邀请码正确！');//登录成功将返回用户基本信息
+            H.$openFrame('reg_head','reg_head.html');
+          }else{
+            showAlert(JSON.stringify(ret));
+          }
+        }else{
+          if(err.statusCode && 401 == err.statusCode){
+            showAlert('邀请码错误，请联系客服购买');//401验证失败
+          }else{
+            showAlert("发生错误：\n" + JSON.stringify(err));
+          }
+        }
+      });
+    }
+  </script>
+	</head>
+	<body>
+		<div class="top-area">
+			<div class="logo">
+				<div class="login-area">
+					
+				</div>
+			</div>
+			<div class="form">
+				<div class="form-area">
+					<div class="form-row">
+						<span class="iconfont icon-yanzhengma H-theme11-color">&nbsp;&nbsp;|</span>
+						<div class="input-box">
+							<input class="H-theme11-color" type="text" id="id" name="vcode" value="" placeholder="请输入邀请码" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="form-btn">
+				<button class="aui-btn aui-btn-4385f6 aui-btn-block" id="login-btn" tapmode="active" onclick="mcm_findById()">
+					下一步
+				</button>
+			</div>
+			<div class="form-o">
+				
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../script/AHelper.js"></script>
+	<script type="text/javascript" src="../../script/zepto.min.js"></script>
+	<script type="text/javascript" src="../../script/api.js"></script>
+</html>

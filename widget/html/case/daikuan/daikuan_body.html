@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>帮分期</title>
+	<link href="../../../css/dk/iconfont/iconfont.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../../../css/swiper/swiper.min.css" />
+    <link href="../../../css/dk/Hui.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="../../../css/daizt/demo.css">
+    <link rel="stylesheet" href="../../../css/daizt/iconfont.css">
+    <style type="text/css">
+        /* 幻灯片 */
+            .banner-container {
+                width: 100%;
+                height: 300px;
+                margin: 0px 0px 2px 0px;
+            }
+            .banner-container .swiper-slide {
+                background-position: center;
+                background-size: cover;
+                -webkit-background-size: cover;
+            }
+            .banner-container .swiper-pagination {
+                bottom: 0;
+            }
+            /* 幻灯片 结束 */
+    </style>
+</head>
+<body>
+        <div class="banner-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" style="background-image:url(../../../image/ka.png)"></div>
+                <div class="swiper-slide" style="background-image:url(../../../image/lianmeng.png)"></div>
+                <div class="swiper-slide" style="background-image:url(../../../image/minzhi.png)"></div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+
+    <div class="laba H-margin-vertical-both-5 H-theme-background-color-white H-padding-horizontal-both-5 H-vertical-middle H-padding-vertical-both-3">
+        <span class="H-icon H-display-block H-margin-horizontal-right-5"><i class="H-iconfont H-icon-voice-right H-font-size-16 H-theme-font-color1"></i></span><label class="H-font-size-14 H-theme-font-color-666">祝贺贷款通道全面开放啦！</label>
+    </div>
+    <div class="loan-list">
+        <div class="H-flexbox-horizontal H-padding-horizontal-both-5">
+            <div tapmode="" onclick="H.openWin('on_head', 'main/on_head.html');" class="H-flex-item H-margin-horizontal-right-3 H-center-all H-theme-background-color-white H-touch-active">
+                <div class="H-padding-vertical-both-20 H-text-align-center">
+                    <span class="H-icon H-display-block H-width-90 H-margin-horizontal-auto  H-center-all H-height-90 H-border-radius-circle H-theme-background-color1">
+                        <i class="H-iconfont H-icon-licai H-font-size-46 H-theme-font-color-white"></i>
+                    </span>
+                    <strong class="H-font-weight-500 H-font-size-18 H-display-block H-padding-vertical-top-5">在线贷款</strong>
+                </div>
+            </div>
+            <div tapmode="" onclick="H.openWin('he_head', 'main/he_head.html');" class="H-flex-item H-margin-horizontal-left-3 H-center-all H-theme-background-color-white H-touch-active">
+                <div class="H-padding-vertical-both-20 H-text-align-center">
+                    <span class="H-icon H-display-block H-width-90 H-margin-horizontal-auto  H-center-all H-height-90 H-border-radius-circle H-theme-background-color2">
+                        <i class="li-iconfont icon-hezuo li-font-size-46 li-theme-font-color-white"></i>
+                    </span>
+                    <strong class="H-font-weight-500 H-font-size-18 H-display-block H-padding-vertical-top-5">合作贷款</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="loan-list">
+        <div class="H-flexbox-horizontal H-padding-horizontal-both-5">
+            <div tapmode="" onclick="alert('程序猿正在疯狂加班研发中……');" class="H-flex-item H-margin-horizontal-right-3 H-center-all H-theme-background-color-white H-touch-active">
+                <div class="H-padding-vertical-both-20 H-text-align-center">
+                    <span class="H-icon H-display-block H-width-90 H-margin-horizontal-auto  H-center-all H-height-90 H-border-radius-circle H-theme-background-color4">
+                        <i class="li-iconfont icon-yinxing li-font-size-46 li-theme-font-color-white"></i>
+                    </span>
+                    <strong class="H-font-weight-500 H-font-size-18 H-display-block H-padding-vertical-top-5">帮分期合作通道</strong>
+                </div>
+            </div>
+            <div tapmode="" onclick="H.openWin('fq_head', 'main/fq_head.html');" class="H-flex-item H-margin-horizontal-left-3 H-center-all H-theme-background-color-white H-touch-active">
+                <div class="H-padding-vertical-both-20 H-text-align-center">
+                    <span class="H-icon H-display-block H-width-90 H-margin-horizontal-auto  H-center-all H-height-90 H-border-radius-circle H-theme-background-color5">
+                        <i class="li-iconfont icon-fenqi li-font-size-46 li-theme-font-color-white"></i>
+                    </span>
+                    <strong class="H-font-weight-500 H-font-size-18 H-display-block H-padding-vertical-top-5">购物分期</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p class="H-margin-bottom10 H-width100-percent H-auto-height"></p>
+    <!-- js -->
+    <script type="text/javascript" src="../../../css/dk/H.js"></script>
+    <script type="text/javascript" src="../../../script/swiper/swiper.min.js"></script>
+    <script type="text/javascript">
+            var swiper = new Swiper('.banner-container', {
+            pagination : '.swiper-pagination',
+            effect : 'cube',
+            grabCursor : true,
+            cube : {
+                shadow : false
+            },
+            autoplay : 4000,
+            autoplayDisableOnInteraction : false,
+            loop : true
+        });
+            
+    </script>
+</body>
+</html>

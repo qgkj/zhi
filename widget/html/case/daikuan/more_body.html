@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>帮分期</title>
+	<link rel="stylesheet" href="../../../css/Hui.css">
+	<link rel="stylesheet" href="../../../css/ziti.css">
+</head>
+<body>
+<div class="H-func-menu-list H-flexbox-horizontal H-background-white">
+        <div class="H-func-menu-item H-flex-item H-text-horizontal-center H-vertical-padding10" tapmode="" onclick="H.openWin('mingxiaodai_head', '../../dai/mingxiaodai/mingxiaodai_head.html');">
+            <span class="H-icon H-theme5-bg H-center-all H-border-radius-circle H-block-margin-auto"><i class="icon-iconfont icon-mingxiaodai H-theme11-color"></i></span>
+            <p class="H-font-size-13 H-margin-top5">名校贷</p>
+        </div>
+        <div class="H-func-menu-item H-flex-item H-text-horizontal-center H-vertical-padding10" tapmode="" onclick="H.openWin('yirendai_head', './xuesheng/com/yirendai_head.html');">
+            <span class="H-icon H-theme2-bg H-center-all H-border-radius-circle H-block-margin-auto"><i class="icon-iconfont icon-lifangti H-theme11-color"></i></span>
+            <p class="H-font-size-13 H-margin-top5">利融网</p>
+        </div>
+        <div class="H-func-menu-item H-flex-item H-text-horizontal-center H-vertical-padding10" tapmode="" onclick="H.openWin('lakala_head', './xuesheng/com/lakala_head.html');">
+            <span class="H-icon H-theme3-bg H-center-all H-border-radius-circle H-block-margin-auto icon-iconfont icon-daxin H-theme11-color">
+                <span class="path1"></span><span class="path2"></span>
+            </span>
+            <p class="H-font-size-13 H-margin-top5">拉卡拉</p>
+        </div>
+        <div class="H-func-menu-item H-flex-item H-text-horizontal-center H-vertical-padding10" tapmode="" onclick="H.openWin('ppgx_head', './xuesheng/com/ppgx_head.html');">
+            <span class="H-icon H-theme4-bg H-center-all H-border-radius-circle H-block-margin-auto"><i class="icon-iconfont icon-lifangti H-theme11-color"></i></span>
+            <p class="H-font-size-13 H-margin-top5">靠谱鸟</p>
+        </div>
+        <div class="H-func-menu-item H-flex-item H-text-horizontal-center H-vertical-padding10" tapmode="" onclick="H.openWin('xiaoedai_head', './xuesheng/com/xiaoedai_head.html');">
+            <span class="H-icon H-theme5-bg H-center-all H-border-radius-circle H-block-margin-auto"><i class="icon-iconfont icon-lifangti H-theme11-color"></i></span>
+            <p class="H-font-size-13 H-margin-top5">你我贷</p>
+        </div>
+    </div>
+    <p class="H-margin-bottom10 H-width100-percent H-auto-height"></p>
+    <!-- js -->
+    <script type="text/javascript" src="../../../script/H.js"></script>
+    <script type="text/javascript" src="../../../script/api.js"></script>
+    <script type="text/javascript">
+        H.ready(function () {
+            // 下拉刷新
+            H.setRefreshHeaderInfo(function (ret, err) {
+                setTimeout(function () {
+                    // 恢复下拉
+                    H.refreshHeaderLoadDone();
+                }, 2000);
+            });
+
+            // 打开页面自动下拉
+            H.refreshHeaderLoading();
+
+            // 下拉加载
+            H.scrolltobottom(function (ret, err) {
+                // 显示加载框
+                H.showProgress();
+                setTimeout(function () {
+                    H.hideProgress();
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>
