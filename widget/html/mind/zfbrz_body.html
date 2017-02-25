@@ -80,20 +80,27 @@
                     mcm.insert(param, function(ret, err){
                         finishing();
                         if(ret){
-                            //showAlert("提交成功");
+                            showAlert("提交成功");
+                            api.openWin({
+                                name: 'czzp_head',
+                                url: './czzp_head.html',
+                                pageParam: {
+                                    name: 'test'
+                                }
+                            });                            
                             //jindua();
-                            api.closeWin();
+                            //api.closeWin();
                             //H.openWin('czzp_head', 'czzp_head.html');
-                            api.alert({
-                            title: 'success',
-                            msg: '提交成功',
-                        }, function(ret, err){
-                            if( ret ){
-                                 H.$openFrame('czzp_head', 'czzp_head.html');
-                            }else{
-                                 alert( JSON.stringify( err ) );
-                            }
-                        });
+                        //     api.alert({
+                        //     title: 'success',
+                        //     msg: '提交成功',
+                        // }, function(ret, err){
+                        //     if( ret ){
+                        //          H.$openFrame('czzp_head', 'czzp_head.html');
+                        //     }else{
+                        //          alert( JSON.stringify( err ) );
+                        //     }
+                        // });
                         }else{
                             showAlert("提交失败，请检查网络设置！");
                         }
