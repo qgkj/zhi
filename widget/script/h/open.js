@@ -1,3 +1,16 @@
+/*!
+ * 框架名称：AHelper.js
+ * 框架作者：新生帝(JsonLei)
+ * 编写日期：2015年12月01日
+ * 版权所有：中山赢友网络科技有限公司
+ * 企业官网：http://www.winu.net
+ * 开源协议：GPL v2 License
+ * 框架描述：APICloud操作库，一切从简，只为了更懒！
+ * 讨论群区：一起改变中国IT教育 18863883
+ * 文档地址：http://www.kancloud.cn/winu/ahelper
+ * 开源地址：http://git.oschina.net/winu.net/AHelper.js
+ */
+
 ;! function(win) {"use strict";
 
 	// 全局模块
@@ -151,6 +164,740 @@
 			return result;
 		}
 	};
+	// ######################################## 完美分割线 #############################################
+	// APICloud 自带api.js
+	(function(window) {
+		var u = {};
+
+		// 判断是否是安卓平台
+		var isAndroid = (/android/gi).test(navigator.appVersion);
+
+		// 设置本地存储
+		var uzStorage = function() {
+			var ls = window.localStorage;
+			if (isAndroid) {
+				ls = os.localStorage();
+			}
+			return ls;
+		};
+		// 初始化api.ajax参数
+		// @url：url地址
+		// @data：数据
+		// @fuSuc：执行成功回调函数
+		// @dataType：回调函数返回格式
+		function parseArguments(url, data, fnSuc, dataType) {
+			if ( typeof (data) == 'function') {
+				dataType = fnSuc;
+				fnSuc = data;
+				data = undefined;
+			}
+			if ( typeof (fnSuc) != 'function') {
+				dataType = fnSuc;
+				fnSuc = undefined;
+			}
+			return {
+				url : url,
+				data : data,
+				fnSuc : fnSuc,
+				dataType : dataType
+			};
+		}
+
+		// 去掉字符串首尾空格
+		// @str：字符串
+		u.trim = function(str) {
+			if (String.prototype.trim) {
+				return str == null ? "" : String.prototype.trim.call(str);
+			} else {
+				return str.replace(/(^\s*)|(\s*$)/g, "");
+			}
+		};
+		// 去掉字符串所有空格
+		// @str：字符串
+		u.trimAll = function(str) {
+			return str.replace(/\s*/g, '');
+		};
+		// 判断对象是否是一个元素
+		// @obj：对象
+		u.isElement = function(obj) {
+			return !!(obj && obj.nodeType == 1);
+		};
+		// 判断对象是否是数组
+		// @obj：对象
+		u.isArray = function(obj) {
+			if (Array.isArray) {
+				return Array.isArray(obj);
+			} else {
+				return obj instanceof Array;
+			}
+		};
+		// 判断对象是否是空对象
+		// @obj：对象
+		u.isEmptyObject = function(obj) {
+			if (JSON.stringify(obj) === '{}') {
+				return true;
+			}
+			return false;
+		};
+		// 为DOM元素绑定事件
+		// @el：DOM元素
+		// @name：事件名称
+		// @fn：事件处理函数
+		// @useCapture：是否捕获事件
+		u.addEvt = function(el, name, fn, useCapture) {
+			if (!u.isElement(el)) {
+				console.warn('$api.addEvt Function need el param, el param must be DOM Element');
+				return;
+			}
+			useCapture = useCapture || false;
+			if (el.addEventListener) {
+				el.addEventListener(name, fn, useCapture);
+			}
+		};
+		// 为DOM元素移除事件
+		// @el：DOM元素
+		// @name：事件名称
+		// @fn：事件处理函数
+		// @useCapture：是否捕获事件
+		u.rmEvt = function(el, name, fn, useCapture) {
+			if (!u.isElement(el)) {
+				console.warn('$api.rmEvt Function need el param, el param must be DOM Element');
+				return;
+			}
+			useCapture = useCapture || false;
+			if (el.removeEventListener) {
+				el.removeEventListener(name, fn, useCapture);
+			}
+		};
+		// 为DOM绑定事件，但该事件只执行一次
+		// @el：DOM元素
+		// @name：事件名称
+		// @fn：事件处理函数
+		// @useCapture：是否捕获事件
+		u.one = function(el, name, fn, useCapture) {
+			if (!u.isElement(el)) {
+				console.warn('$api.one Function need el param, el param must be DOM Element');
+				return;
+			}
+			useCapture = useCapture || false;
+			var that = this;
+			var cb = function() {
+				fn && fn();
+				that.rmEvt(el, name, cb, useCapture);
+			};
+			that.addEvt(el, name, cb, useCapture);
+		};
+		// 选择第一个匹配的DOM元素
+		// @el：DOM元素
+		// @selector：CSS选择器
+		u.dom = function(el, selector) {
+			if (arguments.length === 1 && typeof arguments[0] == 'string') {
+				if (document.querySelector) {
+					return document.querySelector(arguments[0]);
+				}
+			} else if (arguments.length === 2) {
+				if (el.querySelector) {
+					return el.querySelector(selector);
+				}
+			}
+		};
+		// 选择所有匹配的DOM元素
+		// @el：DOM元素
+		// @selector：CSS选择器
+		u.domAll = function(el, selector) {
+			if (arguments.length === 1 && typeof arguments[0] == 'string') {
+				if (document.querySelectorAll) {
+					return document.querySelectorAll(arguments[0]);
+				}
+			} else if (arguments.length === 2) {
+				if (el.querySelectorAll) {
+					return el.querySelectorAll(selector);
+				}
+			}
+		};
+		// 根据ID选择DOM元素
+		// @id：ID
+		u.byId = function(id) {
+			return document.getElementById(id);
+		};
+		// 选择DOM元素的第一个子元素
+		// @el：DOM元素
+		// @selector：CSS选择器
+		u.first = function(el, selector) {
+			if (arguments.length === 1) {
+				if (!u.isElement(el)) {
+					console.warn('$api.first Function need el param, el param must be DOM Element');
+					return;
+				}
+				return el.children[0];
+			}
+			if (arguments.length === 2) {
+				return this.dom(el, selector + ':first-child');
+			}
+		};
+		// 选择DOM元素最后一个子元素
+		// @el：DOM元素
+		// @selector：CSS选择器
+		u.last = function(el, selector) {
+			if (arguments.length === 1) {
+				if (!u.isElement(el)) {
+					console.warn('$api.last Function need el param, el param must be DOM Element');
+					return;
+				}
+				var children = el.children;
+				return children[children.length - 1];
+			}
+			if (arguments.length === 2) {
+				return this.dom(el, selector + ':last-child');
+			}
+		};
+		// 选择第几个元素
+		// @el：DOM元素
+		// @index：索引
+		u.eq = function(el, index) {
+			return this.dom(el, ':nth-child(' + index + ')');
+		};
+		// 排除选择器中指定元素的子元素
+		// @el：DOM元素
+		// @selector：CSS选择器
+		u.not = function(el, selector) {
+			return this.domAll(el, ':not(' + selector + ')');
+		};
+		// 获取相邻的上一个兄弟元素
+		// @el：DOM元素
+		u.prev = function(el) {
+			if (!u.isElement(el)) {
+				console.warn('$api.prev Function need el param, el param must be DOM Element');
+				return;
+			}
+			var node = el.previousSibling;
+			if (node.nodeType && node.nodeType === 3) {
+				node = node.previousSibling;
+				return node;
+			}
+		};
+		// 获取相邻的下一个兄弟元素
+		// @el：DOM元素
+		u.next = function(el) {
+			if (!u.isElement(el)) {
+				console.warn('$api.next Function need el param, el param must be DOM Element');
+				return;
+			}
+			var node = el.nextSibling;
+			if (node.nodeType && node.nodeType === 3) {
+				node = node.nextSibling;
+				return node;
+			}
+		};
+		// 根据选择器匹配最近的父元素
+		// @el：DOM元素
+		// @selector：CSS选择器
+		u.closest = function(el, selector) {
+			if (!u.isElement(el)) {
+				console.warn('$api.closest Function need el param, el param must be DOM Element');
+				return;
+			}
+			var doms, targetDom;
+			var isSame = function(doms, el) {
+				var i = 0, len = doms.length;
+				for (i; i < len; i++) {
+					if (doms[i].isEqualNode(el)) {
+						return doms[i];
+					}
+				}
+				return false;
+			};
+			var traversal = function(el, selector) {
+				doms = u.domAll(el.parentNode, selector);
+				targetDom = isSame(doms, el);
+				while (!targetDom) {
+					el = el.parentNode;
+					if (el != null && el.nodeType == el.DOCUMENT_NODE) {
+						return false;
+					}
+					traversal(el, selector);
+				}
+
+				return targetDom;
+			};
+
+			return traversal(el, selector);
+		};
+		// 判断某一个元素是否包含目标元素
+		// @parent：判断某一个元素是否包含目标元素
+		// @el：DOM元素
+		u.contains = function(parent, el) {
+			var mark = false;
+			if (el === parent) {
+				mark = true;
+				return mark;
+			} else {
+				do {
+					el = el.parentNode;
+					if (el === parent) {
+						mark = true;
+						return mark;
+					}
+				} while (el === document.body || el === document.documentElement);
+
+				return mark;
+			}
+
+		};
+		// 移除DOM元素
+		// @el：DOM元素
+		u.remove = function(el) {
+			if (el && el.parentNode) {
+				el.parentNode.removeChild(el);
+			}
+		};
+		// 获取或设置DOM元素的属性
+		// @el：DOM元素
+		// @name：属性名
+		// @value：属性值
+		u.attr = function(el, name, value) {
+			if (!u.isElement(el)) {
+				console.warn('$api.attr Function need el param, el param must be DOM Element');
+				return;
+			}
+			if (arguments.length == 2) {
+				return el.getAttribute(name);
+			} else if (arguments.length == 3) {
+				el.setAttribute(name, value);
+				return el;
+			}
+		};
+		// 移除DOM元素的属性
+		// @el：DOM元素
+		// @name：属性名
+		u.removeAttr = function(el, name) {
+			if (!u.isElement(el)) {
+				console.warn('$api.removeAttr Function need el param, el param must be DOM Element');
+				return;
+			}
+			if (arguments.length === 2) {
+				el.removeAttribute(name);
+			}
+		};
+		// DOM元素是否含有某个className
+		// @el：DOM元素
+		// @cls：class名
+		u.hasCls = function(el, cls) {
+			if (!u.isElement(el)) {
+				console.warn('$api.hasCls Function need el param, el param must be DOM Element');
+				return;
+			}
+			if (el.className.indexOf(cls) > -1) {
+				return true;
+			} else {
+				return false;
+			}
+		};
+		// 为DOM元素增加className
+		// @el：DOM元素
+		// @cls：class名
+		u.addCls = function(el, cls) {
+			if (!u.isElement(el)) {
+				console.warn('$api.addCls Function need el param, el param must be DOM Element');
+				return;
+			}
+			if ('classList' in el) {
+				el.classList.add(cls);
+			} else {
+				var preCls = el.className;
+				var newCls = preCls + ' ' + cls;
+				el.className = newCls;
+			}
+			return el;
+		};
+		// 移除指定的className
+		// @el：DOM元素
+		// @cls：class名
+		u.removeCls = function(el, cls) {
+			if (!u.isElement(el)) {
+				console.warn('$api.removeCls Function need el param, el param must be DOM Element');
+				return;
+			}
+			if ('classList' in el) {
+				el.classList.remove(cls);
+			} else {
+				var preCls = el.className;
+				var newCls = preCls.replace(cls, '');
+				el.className = newCls;
+			}
+			return el;
+		};
+		// 切换指定的className
+		// @el：DOM元素
+		// @cls：class名
+		u.toggleCls = function(el, cls) {
+			if (!u.isElement(el)) {
+				console.warn('$api.toggleCls Function need el param, el param must be DOM Element');
+				return;
+			}
+			if ('classList' in el) {
+				el.classList.toggle(cls);
+			} else {
+				if (u.hasCls(el, cls)) {
+					u.removeCls(el, cls);
+				} else {
+					u.addCls(el, cls);
+				}
+			}
+			return el;
+		};
+		// 获取或设置常用 Form 表单元素的 value 值
+		// @el：DOM元素
+		// @val：想设置的value值
+		u.val = function(el, val) {
+			if (!u.isElement(el)) {
+				console.warn('$api.val Function need el param, el param must be DOM Element');
+				return;
+			}
+			if (arguments.length === 1) {
+				switch (el.tagName) {
+					case 'SELECT':
+						var value = el.options[el.selectedIndex].value;
+						return value;
+						break;
+					case 'INPUT':
+						return el.value;
+						break;
+					case 'TEXTAREA':
+						return el.value;
+						break;
+				}
+			}
+			if (arguments.length === 2) {
+				switch (el.tagName) {
+					case 'SELECT':
+						el.options[el.selectedIndex].value = val;
+						return el;
+						break;
+					case 'INPUT':
+						el.value = val;
+						return el;
+						break;
+					case 'TEXTAREA':
+						el.value = val;
+						return el;
+						break;
+				}
+			}
+
+		};
+		// 在DOM元素内部，首个子元素前插入HTML字符串
+		// @el：DOM元素
+		// @html：HTML字符串
+		u.prepend = function(el, html) {
+			if (!u.isElement(el)) {
+				console.warn('$api.prepend Function need el param, el param must be DOM Element');
+				return;
+			}
+			el.insertAdjacentHTML('afterbegin', html);
+			return el;
+		};
+		// 在DOM元素内部，最后一个子元素后面插入HTML字符串
+		// @el：DOM元素
+		// @html：HTML字符串
+		u.append = function(el, html) {
+			if (!u.isElement(el)) {
+				console.warn('$api.append Function need el param, el param must be DOM Element');
+				return;
+			}
+			el.insertAdjacentHTML('beforeend', html);
+			return el;
+		};
+		// 在DOM元素前面插入HTML字符串
+		// @el：DOM元素
+		// @html：HTML字符串
+		u.before = function(el, html) {
+			if (!u.isElement(el)) {
+				console.warn('$api.before Function need el param, el param must be DOM Element');
+				return;
+			}
+			el.insertAdjacentHTML('beforebegin', html);
+			return el;
+		};
+		// 在DOM元素后面插入HTML字符串
+		// @el：DOM元素
+		// @html：HTML字符串
+		u.after = function(el, html) {
+			if (!u.isElement(el)) {
+				console.warn('$api.after Function need el param, el param must be DOM Element');
+				return;
+			}
+			el.insertAdjacentHTML('afterend', html);
+			return el;
+		};
+		// 获取或设置DOM元素的innerHTML
+		// @el：DOM元素
+		// @html：HTML字符串
+		u.html = function(el, html) {
+			if (!u.isElement(el)) {
+				console.warn('$api.html Function need el param, el param must be DOM Element');
+				return;
+			}
+			if (arguments.length === 1) {
+				return el.innerHTML;
+			} else if (arguments.length === 2) {
+				el.innerHTML = html;
+				return el;
+			}
+		};
+		// 设置或者获取元素的文本内容
+		// @el：DOM元素
+		// @txt：文本内容
+		u.text = function(el, txt) {
+			if (!u.isElement(el)) {
+				console.warn('$api.text Function need el param, el param must be DOM Element');
+				return;
+			}
+			if (arguments.length === 1) {
+				return el.textContent;
+			} else if (arguments.length === 2) {
+				el.textContent = txt;
+				return el;
+			}
+		};
+		// 获取元素在页面中的位置与宽高，(此为距离页面左侧及顶端的位置，并非距离窗口的位置)
+		// @el：DOM元素
+		u.offset = function(el) {
+			if (!u.isElement(el)) {
+				console.warn('$api.offset Function need el param, el param must be DOM Element');
+				return;
+			}
+			var sl = Math.max(document.documentElement.scrollLeft, document.body.scrollLeft);
+			var st = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
+
+			var rect = el.getBoundingClientRect();
+			return {
+				l : rect.left + sl,
+				t : rect.top + st,
+				w : el.offsetWidth,
+				h : el.offsetHeight
+			};
+		};
+		// 设置所传入的DOM元素的样式，可传入多条样式
+		// @el：DOM元素
+		// @css：想要设置的CSS样式
+		u.css = function(el, css) {
+			if (!u.isElement(el)) {
+				console.warn('$api.css Function need el param, el param must be DOM Element');
+				return;
+			}
+			if ( typeof css == 'string' && css.indexOf(':') > 0) {
+				el.style && (el.style.cssText += ';' + css);
+			}
+		};
+		// 获取指定DOM元素的指定属性的完整的值，如800px
+		// @el：DOM元素
+		// @prop：css属性
+		u.cssVal = function(el, prop) {
+			if (!u.isElement(el)) {
+				console.warn('$api.cssVal Function need el param, el param must be DOM Element');
+				return;
+			}
+			if (arguments.length === 2) {
+				var computedStyle = window.getComputedStyle(el, null);
+				return computedStyle.getPropertyValue(prop);
+			}
+		};
+		// json对象转字符串
+		// @json：json对象
+		u.jsonToStr = function(json) {
+			if ( typeof json === 'object') {
+				return JSON && JSON.stringify(json);
+			}
+		};
+		// 字符串转json对象
+		// @str：字符串
+		u.strToJson = function(str) {
+			if ( typeof str === 'string') {
+				return JSON && JSON.parse(str);
+			}
+		};
+		// 设置localStorage数据
+		// @key：键
+		// @value：值
+		u.setStorage = function(key, value) {
+			if (arguments.length === 2) {
+				var v = value;
+				if ( typeof v == 'object') {
+					v = JSON.stringify(v);
+					v = 'obj-' + v;
+				} else {
+					v = 'str-' + v;
+				}
+				var ls = uzStorage();
+				if (ls) {
+					ls.setItem(key, v);
+				}
+			}
+		};
+		// 获取localStorage数据
+		// @key：键
+		u.getStorage = function(key) {
+			var ls = uzStorage();
+			if (ls) {
+				var v = ls.getItem(key);
+				if (!v) {
+					return;
+				}
+				if (v.indexOf('obj-') === 0) {
+					v = v.slice(4);
+					return JSON.parse(v);
+				} else if (v.indexOf('str-') === 0) {
+					return v.slice(4);
+				}
+			}
+		};
+		// 移除localStorage数据
+		// @key：键
+		u.rmStorage = function(key) {
+			var ls = uzStorage();
+			if (ls && key) {
+				ls.removeItem(key);
+			}
+		};
+		// 清空所有localStorage数据
+		// @key：键
+		u.clearStorage = function() {
+			var ls = uzStorage();
+			if (ls) {
+				ls.clear();
+			}
+		};
+		// 适配iOS7+系统状态栏，为传入的DOM元素增加20px的上内边距
+		// @el：DOM元素
+		u.fixIos7Bar = function(el) {
+			if (!u.isElement(el)) {
+				console.warn('$api.fixIos7Bar Function need el param, el param must be DOM Element');
+				return;
+			}
+			var strDM = api.systemType;
+			if (strDM == 'ios') {
+				var strSV = api.systemVersion;
+				var numSV = parseInt(strSV, 10);
+				var fullScreen = api.fullScreen;
+				var iOS7StatusBarAppearance = api.iOS7StatusBarAppearance;
+				if (numSV >= 7 && !fullScreen && iOS7StatusBarAppearance) {
+					el.style.paddingTop = '20px';
+				}
+			}
+		};
+		// 适配iOS7+、Android4.4+系统状态栏，为传入的DOM元素增加适当的上内边距，避免header与状态栏重叠
+		// @el：DOM元素
+		u.fixStatusBar = function(el) {
+			if (!u.isElement(el)) {
+				console.warn('$api.fixStatusBar Function need el param, el param must be DOM Element');
+				return;
+			}
+			var sysType = api.systemType;
+			if (sysType == 'ios') {
+				u.fixIos7Bar(el);
+			} else if (sysType == 'android') {
+				var ver = api.systemVersion;
+				ver = parseFloat(ver);
+				if (ver >= 4.4) {
+					el.style.paddingTop = '25px';
+				}
+			}
+		};
+		// 延时提示框
+		// @title：标题
+		// @text：内容
+		// @time：延迟时间
+		u.toast = function(title, text, time) {
+			var opts = {};
+			var show = function(opts, time) {
+				api.showProgress(opts);
+				setTimeout(function() {
+					api.hideProgress();
+				}, time);
+			};
+			if (arguments.length === 1) {
+				var time = time || 500;
+				if ( typeof title === 'number') {
+					time = title;
+				} else {
+					opts.title = title + '';
+				}
+				show(opts, time);
+			} else if (arguments.length === 2) {
+				var time = time || 500;
+				var text = text;
+				if ( typeof text === "number") {
+					var tmp = text;
+					time = tmp;
+					text = null;
+				}
+				if (title) {
+					opts.title = title;
+				}
+				if (text) {
+					opts.text = text;
+				}
+				show(opts, time);
+			}
+			if (title) {
+				opts.title = title;
+			}
+			if (text) {
+				opts.text = text;
+			}
+			time = time || 500;
+			show(opts, time);
+		};
+		// api.ajax()方法的post方式简写
+		u.post = function(/*url,data,fnSuc,dataType*/) {
+			var argsToJson = parseArguments.apply(null, arguments);
+			var json = {};
+			var fnSuc = argsToJson.fnSuc;
+			argsToJson.url && (json.url = argsToJson.url);
+			argsToJson.data && (json.data = argsToJson.data);
+			if (argsToJson.dataType) {
+				var type = argsToJson.dataType.toLowerCase();
+				if (type == 'text' || type == 'json') {
+					json.dataType = type;
+				}
+			} else {
+				json.dataType = 'json';
+			}
+			json.method = 'post';
+			api.ajax(json, function(ret, err) {
+				if (ret) {
+					fnSuc && fnSuc(ret);
+				}
+			});
+		};
+		// api.ajax()方法的get方式简写
+		u.get = function(/*url,fnSuc,dataType*/) {
+			var argsToJson = parseArguments.apply(null, arguments);
+			var json = {};
+			var fnSuc = argsToJson.fnSuc;
+			argsToJson.url && (json.url = argsToJson.url);
+			//argsToJson.data && (json.data = argsToJson.data);
+			if (argsToJson.dataType) {
+				var type = argsToJson.dataType.toLowerCase();
+				if (type == 'text' || type == 'json') {
+					json.dataType = type;
+				}
+			} else {
+				json.dataType = 'text';
+			}
+			json.method = 'get';
+			api.ajax(json, function(ret, err) {
+				if (ret) {
+					fnSuc && fnSuc(ret);
+				}
+			});
+		};
+		/*end*/
+		window.$$api = u;
+	})(win);
+
+	// ######################################## 完美分割线 #############################################
 	// APICloud 默认配置对象
 	var defaultsOption = {
 		alert : {
@@ -379,4 +1126,338 @@
 			title : '选择时间'
 		}
 	};
-}
+
+	// ######################################## 完美分割线 #############################################
+
+	// APICloud类库
+	var $$apicloud = {
+
+		// 打开Window窗口
+		// @options：配置对象
+		// @isInit：标识是否已经初始化
+		openWin : function(options, isInit) {
+			isInit = typeof isInit == 'boolean' ? isInit : false;
+			if (!isInit) {
+				// 拓展对象
+				defaultsOption.openWin.pageParam = api.pageParam;
+				defaultsOption.openWin.delay = $$apicloud.isIOS() ? 0 : 300;
+			}
+			var o = options || {};
+			o = $$com.extend(defaultsOption.openWin, o);
+
+			api.openWin(o);
+		},
+		// 快速创建并打开Window（默认全屏）
+		// @winName：window名称
+		// @winUrl：window地址
+		// @pageParam：参数
+		$openWin : function(winName, winUrl, pageParam) {
+			pageParam = pageParam ? pageParam : api.pageParam;
+			$$apicloud.openWin({
+				name : winName,
+				url : winUrl,
+				pageParam : pageParam
+			});
+		},
+		// 关闭window窗口
+		// @callback：回调函数
+		// @options：配置对象
+		closeWin : function(options) {
+			if (options) {
+				// 拓展对象
+				var o = options || {};
+				o = $$com.extend(defaultsOption.closeWin, o);
+				api.closeWin(o);
+			} else {
+				api.closeWin();
+			}
+		},
+		// 快速关闭当前window
+		$closeCurrentWin : function() {
+			api.closeWin();
+		},
+		// 关闭当前window，并打开指定窗口。
+		// @options：配置对象，可以是字符串或者对象
+		closeToWin : function(options) {
+			var o = defaultsOption.closeToWin;
+			if ( typeof options == 'string') {
+				o.name = options;
+			} else {
+				// 拓展对象
+				o = options || {};
+				o = $$com.extend(defaultsOption.closeToWin, o);
+			}
+
+			api.closeToWin(o);
+		},
+		// 快速关闭当前window，并打开指定窗口。
+		// @winName：需要关闭并打开的窗口名称
+		$closeCurrentToWin : function(winName) {
+			winName = winName ? winName : 'root';
+
+			// 只有当前窗口不等于传入窗口名称才关闭
+			if (api.winName != winName) {
+				$$apicloud.closeToWin(winName);
+			}
+		},
+		// 设置window属性
+		// @options：配置对象
+		setWinAttr : function(options) {
+			// 拓展对象
+			var o = options || {};
+			api.setWinAttr(o);
+		},
+		// 快速设置状态栏
+		// @callback：回调函数，并返回头部值
+		// @headerId：导航栏Id
+		$fixStatusBar : function(callback, headerId) {
+			var header = $$api.byId(headerId);
+			if (header) {
+				var systemType = api.systemType;
+				var systemVersion = parseFloat(api.systemVersion);
+				if ($$apicloud.isIOS()) {
+					$$api.fixIos7Bar(header);
+				} else if (systemType == 'android') {
+					if (systemVersion >= 4.4) {
+						header.style.paddingTop = '25px';
+					}
+				}
+
+				if ($$com.isFunction(callback)) {
+					var offset = $$apicloud.offset(headerId);
+					callback(offset);
+				}
+			} else {
+				console.wran('传入导航ID有误');
+			}
+		},
+		// 打开Frame窗口
+		// @options：配置对象
+		// @isInit：标识是否已经完成初始化
+		openFrame : function(options, isInit) {
+			isInit = typeof isInit == 'boolean' ? isInit : false;
+			if (!isInit) {
+				// 拓展对象
+				defaultsOption.openFrame.pageParam = api.pageParam;
+				defaultsOption.openFrame.rect.w = api.winWidth;
+				defaultsOption.openFrame.rect.h = api.winHeight;
+			}
+			var o = options || {};
+			o = $$com.extend(defaultsOption.openFrame, o);
+			o.rect = $$com.extend(o.rect, options.rect || {});
+
+			api.openFrame(o);
+		},
+		// 快速创建并打开Frame对象(不带导航，默认和window一样大小)
+		// @frameName：frame名称
+		// @frameUrl：frame地址
+		// @pageParam：参数
+		// @rect：区域
+		$openFrame : function(frameName, frameUrl, pageParam, rect, bounces) {
+			bounces = typeof bounces == "boolean" ? bounces : false;
+			pageParam = pageParam ? pageParam : api.pageParam;
+
+			$$apicloud.openFrame({
+				name : frameName,
+				url : frameUrl,
+				pageParam : pageParam,
+				rect : rect,
+				bounces : bounces
+			});
+		},
+		// 快速创建并打开Frame对象(带导航)
+		// @headerId：导航选择器ID
+		// @options：配置对象
+		// @footerId：底部选择器ID
+		$openFrameWithNav : function(headerId, options, footerId) {
+			$$apicloud.$fixStatusBar(function(offset) {
+				var o = options || {};
+				o = $$com.extend(defaultsOption.openFrame, o);
+
+				var footerOffset = $$apicloud.offset(footerId);
+				if (!options.rect) {
+					o.rect.x = offset.l;
+					o.rect.h = api.winHeight - offset.h - footerOffset.h;
+					o.rect.w = api.winWidth;
+				}
+				o.rect.y = offset.h;
+				$$apicloud.openFrame(o, true);
+			}, headerId);
+		},
+		// 关闭Frame
+		// @frameName：窗体名称
+		closeFrame : function(frameName) {
+			api.closeFrame({
+				name : frameName ? frameName : api.frameName
+			});
+		},
+		// 快速关闭当前Frame
+		$closeCurrentFrame : function() {
+			$$apicloud.closeFrame(api.frameName);
+		},
+		// 设置Frame属性
+		// @options：配置对象
+		setFrameAttr : function(options) {
+			// 拓展对象
+			var o = options || {};
+			api.setFrameAttr(o);
+		},
+		// 设置窗体显示隐藏状态
+		// @frameName：框架名称
+		// @isHidden：是否隐藏
+		setFrameStatus : function(frameName, isHidden) {
+			isHidden = ( typeof arguments[1] != 'boolean') ? false : arguments[1];
+			$$apicloud.setFrameAttr({
+				name : frameName,
+				hidden : isHidden
+			});
+		},
+		// 快速设置窗体显示隐藏状态
+		// @frameName：框架名称
+		// @isHidden：是否隐藏
+		$setFrameStatus : function(frameName, isHidden) {
+			$$apicloud.setFrameStatus(frameName, isHidden);
+		},
+		// 打开FrameGroup窗口组
+		// @callback：回调函数
+		// @options：配置对象
+		// @isInit：标识是否已经初始化
+		openFrameGroup : function(callback, options, isInit) {
+			isInit = typeof isInit == 'boolean' ? isInit : false;
+			if (!isInit) {
+				// 拓展对象
+				defaultsOption.openFrameGroup.rect.w = api.winWidth;
+				defaultsOption.openFrameGroup.rect.h = api.winHeight;
+			}
+
+			var o = options || {};
+			o = $$com.extend(defaultsOption.openFrameGroup, o);
+			o.rect = $$com.extend(o.rect, options.rect || {});
+
+			if (o && o.frames && o.frames.length > 0) {
+				// 设置默认参数
+				defaultsOption.openFrame.pageParam = api.pageParam;
+
+				for (var i = 0; i < o.frames.length; i++) {
+					var frame = (o.frames)[i];
+					frame = $$com.extend(defaultsOption.openFrame, frame);
+					frame = $$apicloud.returnNewMemoryObj(frame);
+					// 移除rect属性
+					delete frame['rect'];
+					// 避免内存地址分配问题
+					o.frames[i] = frame;
+				}
+
+				api.openFrameGroup(o, function(ret, err) {
+					if ($$com.isFunction(callback)) {
+						callback(ret, err);
+					}
+				});
+			}
+		},
+		// 快速创建并打开frameGroup（不带导航）
+		// @callback：回调函数
+		// @groupName：窗口组名称
+		// @frames：窗口组frame集合
+		// @index：默认索引
+		$openFrameGroup : function(callback, groupName, frames, index) {
+			frames = frames ? frames : [];
+
+			index = typeof index == "number" ? index : 0;
+			if (index > frames.length - 1)
+				index = frames.length - 1;
+
+			$$apicloud.openFrameGroup(function(ret, err) {
+				if ($$com.isFunction(callback)) {
+					callback(ret, err);
+				}
+			}, {
+				name : groupName,
+				frames : frames,
+				index : index
+			});
+		},
+		// 快速创建并打开FrameGroup对象(带导航)
+		// @callback：回调函数
+		// @headerId：导航选择器ID
+		// @options：配置对象
+		// @footerId：底部选择器ID
+		$openFrameGroupWithNav : function(callback, headerId, options, footerId) {
+			// 拓展对象
+			var o = options || {};
+			o = $$com.extend(defaultsOption.openFrameGroup, o);
+
+			$$apicloud.$fixStatusBar(function(offset) {
+				var footerOffset = $$apicloud.offset(footerId);
+				if (!options.rect) {
+					o.rect.x = offset.l;
+					o.rect.h = api.winHeight - offset.h - footerOffset.h;
+					o.rect.w = api.winWidth;
+				}
+				o.rect.y = offset.h;
+
+				$$apicloud.openFrameGroup(function(ret, err) {
+					if ($$com.isFunction(callback)) {
+						callback(ret, err);
+					}
+				}, o, true);
+			}, headerId);
+		},
+		// 关闭窗口组
+		// @frameGroupName：窗口组名称
+		closeFrameGroup : function(frameGroupName) {
+			api.closeFrameGroup({
+				name : frameGroupName
+			});
+		},
+		// 设置窗口组属性
+		// @options：配置对象
+		setFrameGroupAttr : function(options) {
+			// 拓展对象
+			var o = options || {};
+			api.setFrameGroupAttr(o);
+		},
+		// 设置窗口组显示隐藏状态
+		// @groupName：窗口组名
+		// @isHidden：是否隐藏
+		// @isHidden：是否隐藏
+		setFrameGroupStatus : function(groupName, isHidden) {
+			isHidden = ( typeof arguments[1] != 'boolean') ? false : arguments[1];
+			$$apicloud.setFrameGroupAttr({
+				hidden : isHidden,
+				name : groupName
+			});
+		},
+		// 快速设置窗口组显示隐藏状态
+		// @groupName：窗口组名
+		// @isHidden：是否隐藏
+		// @isHidden：是否隐藏
+		$setFrameGroupStatus : function(groupName, isHidden) {
+			$$apicloud.setFrameGroupStatus(groupName,isHidden);
+		},
+		// 设置窗口组的显示索引
+		// @options：配置对象或者显示索引
+		setFrameGroupIndex : function(options) {
+			var o = defaultsOption.setFrameGroupIndex;
+			if ( typeof options == 'number') {
+				o.index = options;
+			} else {
+				// 拓展对象
+				o = options || {};
+				o = $$com.extend(defaultsOption.setFrameGroupIndex, o);
+			}
+
+			api.setFrameGroupIndex(o);
+		}
+	};
+
+
+	// 核心函数
+	win.H = $$apicloud, win.H.$apicloud = $$apicloud;
+	win.H.$com = $$com;
+	win.H.$api = $$api;
+	win.H.$tppl = $$tppl;
+	win.H.$v = '1.1.2';
+	win.H.$module = modules;
+
+}(window);
