@@ -12,6 +12,9 @@
     <div class="H-flexbox-horizontal H-border-vertical-bottom-after">
         <input type="text" class="H-textbox H-vertical-align-middle H-vertical-middle H-font-size-16 H-flex-item H-box-sizing-border-box H-border-none H-outline-none H-padding-12" id="zfbzh" placeholder="银行卡帐号" />
     </div>
+    <div class="H-flexbox-horizontal H-border-vertical-bottom-after">
+        <input type="text" class="H-textbox H-vertical-align-middle H-vertical-middle H-font-size-16 H-flex-item H-box-sizing-border-box H-border-none H-outline-none H-padding-12" id="zh" placeholder="请填写银行支行" />
+    </div>
     <div class="H-padding-10">
         <button class="H-button H-width-100-percent  H-font-size-15 H-outline-none H-padding-vertical-both-12 H-padding-horizontal-both-20 H-theme-background-color6 H-theme-font-color-white H-theme-border-color6 H-theme-border-color6-click H-theme-background-color6-click H-theme-font-color6-click H-border-radius-3" tapmode="active" onclick="mcm_insert(this)">提交保存</button>
     </div>
@@ -69,12 +72,14 @@
         function mcm_insert(tag){
                 if (! $api.hasCls(tag, 'disabled')) {
                 var zfbzh = $api.dom('#zfbzh');
+                var zh = $api.dom('#zh');
                 if (!$api.val(zfbzh)) {
                     $api.toast('不能为空！');
                 } else {
                     var us = $api.getStorage('user');
                     var ac = value('zfbzh');
-                    var dc = {hao:ac, username:us};
+                    var bc = value('zh');
+                    var dc = {hao:ac, hang:bc,username:us};
                     var param = {class:clazz, value:dc};
                     loading();
                     mcm.insert(param, function(ret, err){
