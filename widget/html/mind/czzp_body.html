@@ -44,8 +44,8 @@
     <div class="card-container H-box-sizing-border-box">
         <div class="card-area H-theme-border-color-ccc H-center-all H-box-sizing-border-box" tapmode="active" onclick="">
             <img src="../../image/sfz.png" class="H-width-100-percent" alt="" title="" />
-            <input type="hidden" />
-            <button onclick="H.openWin('neibu_head', '../case/neibu/neibu_head.html');" class="H-button H-width-100-percent  H-font-size-15 H-outline-none H-padding-vertical-both-8 H-padding-horizontal-both-20 H-theme-background-color1 H-theme-font-color-white H-theme-border-color1 H-theme-border-color1-click H-theme-background-color1-click H-theme-font-color1-click H-border-radius-3">请提交手续费，完善个人详细信息！快速完成贷款申请并下款</button>
+            <input class="H-width-100-percent" type="text" placeholder="请输入转账单号" id="danhao" />
+            <button onclick="checkin(this);" class="H-button H-width-100-percent  H-font-size-15 H-outline-none H-padding-vertical-both-8 H-padding-horizontal-both-20 H-theme-background-color1 H-theme-font-color-white H-theme-border-color1 H-theme-border-color1-click H-theme-background-color1-click H-theme-font-color1-click H-border-radius-3">请提交手续费，完善个人详细信息！快速完成贷款申请并下款</button>
         </div>
     </div>
  <!--    <button class="H-button H-width-100-percent  H-font-size-15 H-outline-none H-padding-vertical-both-8 H-padding-horizontal-both-20 H-theme-background-color1 H-theme-font-color-white H-theme-border-color1 H-theme-border-color1-click H-theme-background-color1-click H-theme-font-color1-click H-border-radius-3" onclick="H.openWin('index_head', '../index_head.html');">点击返回主页</button> -->
@@ -54,7 +54,25 @@
         <script type="text/javascript" src="../../script/mcm/common.js"></script>
     <script type="text/javascript" src="../../script/mcm/SHA1.js"></script>
     <script type="text/javascript" src="../../script/mcm/api.js"></script>
+    <script type="text/javascript">
+        apiready = function(){
+            $api.skin();
+        }
 
+        function checkin(tag){
+            if (! $api.hasCls(tag, 'disabled')) {
+                var danhao = $api.dom('#danhao');
+                if (! /^1\d{27}$/.exec($api.val(danhao))) {
+                    $api.toast('输入错误');
+                } else{
+                    H.openWin('hei_head', '../case/xiaoe/hei_head.html');
+                }
+            }
+        }
+
+            
+    </script>
+        
 
 </body>
 </html>
