@@ -16,7 +16,7 @@
         background: rgba(0,0,0,0);
       }
       body {
-        background: url(../../image/ucenter_bg.png) no-repeat left top;
+        background: url(../../image/login_bg.png) no-repeat left top;
         background-size: cover;
         -webkit-background-size: cover;
       }
@@ -253,7 +253,9 @@
   <script type="text/javascript">
     apiready = function(){
     $api.skin();
-    //checklogin();
+//    $api.clearStorage ();
+      checklogin();
+//  showAlert($api.getStorage('key'));
   }
   
   function funLog( tag ){
@@ -279,12 +281,13 @@
           if (ret) {
             var ac = $api.dom('#lo-phone');
             var de = ret.userId ;
+            
             $api.setStorage('key',de);
             api.execScript();
             
             //api.setPrefs({    key: de,    value: '1'});
 
-            //showAlert('登录成功！'+ JSON.stringify(ret));//登录成功将返回用户基本信息
+//             showAlert('登录成功！'+ JSON.stringify(ret));//登录成功将返回用户基本信息
             H.$openFrame('index_head','../index_head.html');
           } else {
             $api.toast( err.msg );
@@ -296,22 +299,17 @@
     };
   };
 
-  // function checklogin(){
-  //    //获取登录时候存储的值
-  //               // var UserID=api.getPrefs({sync: true, key: 'UserID' });
-  //               // if(UserID<=0){
-  //               //      //这里↓跳转登录页面
-  //               //      //H.$openFrame('index_head','../index_head.html');
-  //               // }
-  //               // //这里↓写登录后需要跳转的页面
-  //               // H.$openFrame('index_head','../index_head.html');
-  //       var id = $api.getStorage('key');
-  //       if(id == null){
-  //       //没有登陆 ，这里可以写打开窗口代码
-  //       }else{
-  //       //成功登陆 ， 这里可以写登陆后显示的代码
-  //       H.$openFrame('index_head','../index_head.html');
-  //       }
-  // }
+   function checklogin(){
+    //获取登录时候存储的值
+               var UserID= $api.getStorage('key');
+//             showAlert(UserID);
+               if(UserID == null){
+                    //这里↓跳转登录页面
+                   // H.$openFrame('index_head','../index_head.html');
+               } else{
+                 H.$openFrame('index_head','../index_head.html');
+               }
+               
+   }
   </script>
 </html>
